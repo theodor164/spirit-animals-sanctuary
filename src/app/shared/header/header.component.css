@@ -1,0 +1,41 @@
+.toolbar-content {
+  max-width: 1160px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.title {
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.menu-button {
+  display: none;
+}
+
+.active-link {
+  background-color: #e0e0e0; /* light highlight */
+  color: #1976d2; /* primary color */
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .menu-button {
+    display: inline-flex;
+  }
+}

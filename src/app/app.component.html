@@ -1,1 +1,61 @@
-<router-outlet />
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer mode="over" position="end" class="sidenav">
+    <div class="sidenav-header">
+      <button
+        mat-icon-button
+        aria-label="Close sidenav"
+        (click)="drawer.close()"
+        class="close-button"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <a
+      mat-button
+      routerLink="/"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="drawer.close()"
+      >Home</a
+    >
+    <a
+      mat-button
+      routerLink="/animals"
+      routerLinkActive="active-link"
+      (click)="drawer.close()"
+      >Animals</a
+    >
+    <a
+      mat-button
+      routerLink="/adopt"
+      routerLinkActive="active-link"
+      (click)="drawer.close()"
+      >Adopt</a
+    >
+    <a
+      mat-button
+      routerLink="/donate"
+      routerLinkActive="active-link"
+      (click)="drawer.close()"
+      >Donate</a
+    >
+    <a
+      mat-button
+      routerLink="/contact"
+      routerLinkActive="active-link"
+      (click)="drawer.close()"
+      >Contact</a
+    >
+  </mat-sidenav>
+
+  <mat-sidenav-content class="sidenav-content">
+    <app-header [drawer]="drawer"></app-header>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <app-footer></app-footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>

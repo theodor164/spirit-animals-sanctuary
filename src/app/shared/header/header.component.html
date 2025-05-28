@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <div class="toolbar-content">
+    <span class="title">Spirit Animals Sanctuary</span>
+
+    <span class="spacer"></span>
+
+    <nav class="nav-links">
+      <a
+        mat-button
+        routerLink="/"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Home</a
+      >
+      <a mat-button routerLink="/animals" routerLinkActive="active-link"
+        >Animals</a
+      >
+      <a mat-button routerLink="/adopt" routerLinkActive="active-link">Adopt</a>
+      <a mat-button routerLink="/donate" routerLinkActive="active-link"
+        >Donate</a
+      >
+      <a mat-button routerLink="/contact" routerLinkActive="active-link"
+        >Contact</a
+      >
+    </nav>
+    <button
+      type="button"
+      mat-icon-button
+      (click)="drawer.toggle()"
+      class="menu-button"
+      aria-label="Toggle navigation"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

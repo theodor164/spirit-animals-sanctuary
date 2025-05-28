@@ -1,0 +1,39 @@
+.container {
+  padding: 2rem;
+}
+
+.sidenav {
+  width: 250px;
+  height: 100%;
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.sidenav a {
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.sidenav-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
+}
+
+.close-button {
+  color: #333;
+}
+
+.sidenav-content {
+  height: 100vh;
+}
+
+.active-link {
+  background-color: #e0e0e0; /* light highlight */
+  color: #1976d2; /* primary color */
+  font-weight: bold;
+}

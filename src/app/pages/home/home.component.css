@@ -1,0 +1,37 @@
+.hero-section {
+  height: 75vh;
+  background-image: url("https://spiritanimals.ro/wp-content/uploads/2023/08/received_1818580991862288.jpg");
+  background-attachment: fixed; /* 💡 Key for parallax */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+  margin-top: -64px; /* Adjust based on header height */
+}
+
+@media (max-width: 1280px) {
+  .hero-section {
+    background-attachment: local; /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    background-position: 51.03% 0%;
+    padding-top: 34%; /* Adjust for smaller screens */
+    padding-bottom: 34%; /* Adjust for smaller screens */
+  }
+}
+
+@media (max-width: 680px) {
+  .hero-section {
+    background-position: 29.43% 48.1%;
+    padding-top: 219px;
+    padding-bottom: 219px;
+  }
+}

@@ -1,0 +1,34 @@
+.donate-section {
+  background-image: url("https://spiritanimals.ro/wp-content/uploads/2023/06/328946397_3640712116205270_6528763930313679802_n.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50.16% 0%;
+  padding-bottom: 256px;
+  padding-top: 256px;
+}
+
+.donate-section-content {
+  max-width: 94%;
+  margin: 0 auto;
+  width: 1160px;
+  display: flex;
+  gap: 32px;
+}
+
+.donate-container, .patreon-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.donate-link, .patreon-link {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}

@@ -1,3 +1,34 @@
 <section class="page-container">
-  <p>adoption-form works!</p>
+  <section class="adopt-hero">
+  <h1>Adopt a Friend</h1>
+  <p>
+    Give a rescued animal the loving home they deserve. By adopting, you’re giving them a second chance at life and becoming part of their healing journey.
+  </p>
+</section>
+
+<section class="adopt-info">
+  <h2>Why Adopt?</h2>
+  <p>
+    Every animal at our sanctuary has a story. Rescued from neglect or slaughter, these beautiful souls are now safe, but many are still waiting for their forever home.
+  </p>
+  <ul>
+    <li>Adoption changes lives — theirs and yours</li>
+    <li>We ensure ethical and responsible placements</li>
+    <li>You’ll always be part of our extended family</li>
+  </ul>
+</section>
+
+<section class="adopt-gallery">
+  <div class="animal-card" *ngFor="let animal of animals">
+    <img [ngSrc]="animal.image" [alt]="animal.name" width="400" height="300" />
+    <h3>{{ animal.name }}</h3>
+    <p>{{ animal.description }}</p>
+  </div>
+</section>
+
+<section class="adopt-cta">
+  <h2>Ready to Adopt?</h2>
+  <a href="/contact" class="adopt-button">Contact Us</a>
+</section>
+
 </section>

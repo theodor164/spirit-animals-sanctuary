@@ -1,0 +1,46 @@
+<section class="volunteer-section">
+  <div class="volunteer-section-content">
+    <h2>Become a volunteer</h2>
+    <p>
+      Join our dedicated team in providing a safe haven for 90 remarkable animal
+      souls. Experience the joy of nurturing and caring for these beautiful
+      beings, witnessing their healing and happiness firsthand. As a volunteer,
+      you’ll foster connections with fellow animal lovers and contribute to a
+      thriving community of kindness. Together, we can make a profound impact on
+      the lives of our animal residents while fostering personal growth and a
+      deeper appreciation for the remarkable bond between humans and animals.
+    </p>
+    <div class="gallery-section">
+      <div class="gallery-grid">
+        <img
+          *ngFor="let image of images; let i = index"
+          [ngSrc]="image"
+          alt="Gallery Image {{ i + 1 }}"
+          class="gallery-image"
+          (click)="openLightbox(i)"
+          width="278.75"
+          height="209.06"
+        />
+      </div>
+
+      <div class="lightbox" *ngIf="lightboxOpen" (click)="onBackdropClick($event)">
+        <div class="lightbox-content" #lightboxContent>
+          <span class="close" (click)="closeLightbox()">&times;</span>
+          <a class="prev" (click)="prevImage()">❮</a>
+          <ng-container *ngFor="let image of imagesScaled; let i = index">
+            <img
+              *ngIf="i === currentIndex"
+              [ngSrc]="image"
+              alt="Volunteer Image"
+              class="lightbox-image"
+              [width]="imageWidths[i]"
+              [height]="imageHeights[i]"
+            />
+          </ng-container>
+          <a class="next" (click)="nextImage()">❯</a>
+        </div>
+      </div>
+    </div>
+    <a routerLink="/volunteer" class="volunteer-link">Find more</a>
+  </div>
+</section>

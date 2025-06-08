@@ -1,3 +1,38 @@
 <section class="page-container">
-  <p>volunteer works!</p>
+  <section class="volunteer-hero">
+    <h1>Become a Volunteer</h1>
+    <p>
+      Join our mission to care for rescued animals and be part of a kind-hearted
+      community making a difference.
+    </p>
+  </section>
+
+  <section class="volunteer-content">
+    <div class="volunteer-info">
+      <h2>Why Volunteer With Us?</h2>
+      <p>
+        At Spirit Animals Sanctuary, volunteering is more than just helping —
+        it's connecting with animals, nature, and like-minded people who care
+        deeply about compassion and healing.
+      </p>
+      <ul>
+        <li>Help care for over 90 rescued animals</li>
+        <li>Support daily sanctuary operations</li>
+        <li>Assist with feeding, cleaning, and enrichment</li>
+        <li>Contribute to special projects and events</li>
+      </ul>
+      <a class="cta-button" href="/contact">Join Us Now</a>
+    </div>
+
+    <div class="volunteer-gallery">
+      <img
+        *ngFor="let image of images"
+        [ngSrc]="image"
+        alt="Volunteer Activity"
+        class="volunteer-img"
+        width="400"
+        height="300"
+      />
+    </div>
+  </section>
 </section>

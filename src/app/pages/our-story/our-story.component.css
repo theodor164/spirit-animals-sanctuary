@@ -1,0 +1,58 @@
+.our-story-hero {
+  background: #fff8f3;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.our-story-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.our-story-hero p {
+  font-size: 1.25rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.our-story-content {
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.story-block {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.story-block.reverse {
+  flex-direction: row-reverse;
+}
+
+.story-image {
+  flex: 1 1 500px;
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.story-text {
+  flex: 1 1 400px;
+}
+
+.story-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.story-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #444;
+}

@@ -1,0 +1,65 @@
+.donate-hero {
+  background: #fef6f0;
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.donate-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.donate-hero p {
+  font-size: 1.25rem;
+  color: #555;
+}
+
+.donate-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  background: #fff;
+}
+
+.donate-box {
+  background: #f3f3f3;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.donate-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #ff6b6b;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.donate-button:hover {
+  background: #e85050;
+}
+
+.donate-info {
+  padding: 3rem 1rem;
+  background: #fafafa;
+  text-align: center;
+}
+
+.donate-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.donate-info li {
+  margin: 0.5rem 0;
+  font-weight: 500;
+}

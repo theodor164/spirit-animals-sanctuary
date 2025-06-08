@@ -1,4 +1,64 @@
 .footer-toolbar {
   justify-content: center;
   font-size: 0.9rem;
+  height: auto;
+  display: block;
+  background-color: #00a8b5;
+}
+
+.footer-container {
+  background-color: #00a8b5;
+  max-width: 1160px;
+  width: 97%;
+  margin: 0 auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.socials-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-and-socials {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  color: white;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+
+li {
+  list-style: none;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
 }

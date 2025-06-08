@@ -1,3 +1,42 @@
 <section class="page-container">
-  <p>animal-list works!</p>
+  <section class="animals-hero">
+    <h1>Meet Our Residents</h1>
+    <p>
+      Each animal at Spirit Animals Sanctuary has their own story of survival,
+      healing, and joy.
+    </p>
+  </section>
+
+  <section class="animals-gallery">
+    <div
+      class="animal-card"
+      *ngFor="let animal of animals; let i = index"
+      (click)="openLightbox(i)"
+    >
+      <img
+        [ngSrc]="animal.thumbnail"
+        [alt]="animal.name"
+        class="animal-thumb"
+        width="300"
+        height="200"
+      />
+      <h3>{{ animal.name }}</h3>
+    </div>
+  </section>
+
+  <div class="lightbox" *ngIf="lightboxOpen">
+    <div class="lightbox-content" (click)="closeLightbox($event)">
+      <span class="close" (click)="closeLightbox()">&times;</span>
+      <a class="prev" (click)="prevImage()">❮</a>
+      <img
+        [ngSrc]="animals[currentIndex].full"
+        [alt]="animals[currentIndex].name"
+        class="lightbox-image"
+        width="800"
+        height="600"
+      />
+      <h3>{{ animals[currentIndex].name }}</h3>
+      <a class="next" (click)="nextImage()">❯</a>
+    </div>
+  </div>
 </section>

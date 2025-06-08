@@ -1,0 +1,55 @@
+<section class="page-container">
+  <section class="donate-once-hero">
+    <h1>Make a One-Time Donation</h1>
+    <p>
+      Your kindness can change lives. Every donation helps us rescue, feed, and
+      care for animals in need.
+    </p>
+  </section>
+
+  <section class="donate-once-wrapper">
+    <div class="donate-options">
+      <h2>Select an amount</h2>
+      <div class="amount-buttons">
+        <button
+          *ngFor="let amount of predefinedAmounts"
+          (click)="selectAmount(amount)"
+          [class.selected]="selectedAmount === amount"
+        >
+          €{{ amount }}
+        </button>
+      </div>
+      <div class="custom-amount">
+        <label>
+          Or enter a custom amount:
+          <input
+            type="number"
+            [(ngModel)]="customAmount"
+            (input)="updateSelectedAmount()"
+            placeholder="e.g. 25"
+          />
+        </label>
+      </div>
+    </div>
+
+    <div class="donate-form">
+      <h2>Your Information</h2>
+      <form (submit)="submitDonation()">
+        <label>
+          Full Name:
+          <input type="text" [(ngModel)]="form.name" name="name" required />
+        </label>
+        <label>
+          Email Address:
+          <input type="email" [(ngModel)]="form.email" name="email" required />
+        </label>
+
+        <div class="donate-summary">
+          <p><strong>Donation:</strong> €{{ selectedAmount || 0 }}</p>
+        </div>
+
+        <button type="submit">Donate Now</button>
+      </form>
+    </div>
+  </section>
+</section>

@@ -9,6 +9,9 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { VolunteerComponent } from './pages/volunteer/volunteer.component';
 import { OurStoryComponent } from './pages/our-story/our-story.component';
 import { DonateOnceComponent } from './pages/donate-once/donate-once.component';
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,5 +23,9 @@ export const routes: Routes = [
   { path: 'volunteer', component: VolunteerComponent },
   { path: 'our-story', component: OurStoryComponent },
   { path: 'donate/once', component: DonateOnceComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  // Fallback route for 404 Not Found
   { path: '**', component: NotFoundComponent },
 ];

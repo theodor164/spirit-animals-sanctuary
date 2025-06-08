@@ -1,0 +1,94 @@
+<section class="page-container">
+  <h2>Create an Account</h2>
+  <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" novalidate>
+    <!-- Name -->
+    <label for="name">Full Name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      ngModel
+      required
+      minlength="3"
+      #name="ngModel"
+      placeholder="Your full name"
+    />
+    <div *ngIf="name.invalid && name.touched" class="error-message">
+      <div *ngIf="name.errors?.['required']">Name is required.</div>
+      <div *ngIf="name.errors?.['minlength']">
+        Name must be at least 3 characters.
+      </div>
+    </div>
+
+    <!-- Email -->
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      ngModel
+      required
+      email
+      #email="ngModel"
+      placeholder="your@email.com"
+    />
+    <div *ngIf="email.invalid && email.touched" class="error-message">
+      <div *ngIf="email.errors?.['required']">Email is required.</div>
+      <div *ngIf="email.errors?.['email']">Please enter a valid email.</div>
+    </div>
+
+    <!-- Password -->
+    <label for="password">Password</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      ngModel
+      required
+      minlength="6"
+      #password="ngModel"
+      placeholder="Enter password"
+    />
+    <div *ngIf="password.invalid && password.touched" class="error-message">
+      <div *ngIf="password.errors?.['required']">Password is required.</div>
+      <div *ngIf="password.errors?.['minlength']">
+        Password must be at least 6 characters.
+      </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <label for="confirmPassword">Confirm Password</label>
+    <input
+      type="password"
+      id="confirmPassword"
+      name="confirmPassword"
+      ngModel
+      required
+      #confirmPassword="ngModel"
+      placeholder="Confirm password"
+      (ngModelChange)="
+        checkPasswordMatch(password.value, confirmPassword.value)
+      "
+    />
+    <div
+      *ngIf="
+        confirmPassword.touched && (confirmPassword.invalid || !passwordsMatch)
+      "
+      class="error-message"
+    >
+      <div *ngIf="confirmPassword.errors?.['required']">
+        Confirmation is required.
+      </div>
+      <div *ngIf="!passwordsMatch">Passwords do not match.</div>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="
+        registerForm.invalid || !passwordsMatch || !registerForm.dirty
+      "
+    >
+      Register
+    </button>
+  </form>
+</section>

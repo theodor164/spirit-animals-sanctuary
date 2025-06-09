@@ -61,6 +61,23 @@
       (click)="drawer.close()"
       >Contact</a
     >
+    <button
+      routerLink="/login"
+      *ngIf="isLoggedIn()"
+      (click)="logout()"
+      mat-button
+      (click)="drawer.close()"
+    >
+      Logout
+    </button>
+    <button
+      routerLink="/login"
+      *ngIf="!isLoggedIn()"
+      mat-button
+      (click)="drawer.close()"
+    >
+      Login
+    </button>
   </mat-sidenav>
 
   <mat-sidenav-content class="sidenav-content">

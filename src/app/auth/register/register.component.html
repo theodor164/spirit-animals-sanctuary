@@ -82,6 +82,9 @@
       <div *ngIf="!passwordsMatch">Passwords do not match.</div>
     </div>
 
+    <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
     <button
       type="submit"
       [disabled]="

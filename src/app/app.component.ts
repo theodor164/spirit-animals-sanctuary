@@ -10,6 +10,8 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { NgIf } from '@angular/common';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +25,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
     MatSidenavContent,
     MatButtonModule,
     RouterLink,
-    RouterModule
+    RouterModule,
+    NgIf
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -31,15 +34,23 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 export class AppComponent implements AfterViewInit {
   @ViewChild('drawer') drawer!: MatSidenav;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {}
 
   ngAfterViewInit(): void {
     this.breakpointObserver
-      .observe(['(min-width: 769px)'])
+      .observe(['(min-width: 810px)'])
       .subscribe((result) => {
         if (result.matches && this.drawer.opened) {
           this.drawer.close();
         }
       });
+  }
+  
+  logout(): void {
+    this.authService.logout();
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 }

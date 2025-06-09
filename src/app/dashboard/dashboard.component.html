@@ -1,7 +1,25 @@
 <section class="page-container">
   <h2>Welcome to your Dashboard!</h2>
-  <p>
-    This area will display user-specific info like donations, adoptions, and
-    subscriptions.
-  </p>
+  <p>{{ message }}</p>
+
+  <div class="user-info" *ngIf="user">
+    <h3>Your Info</h3>
+    <ul>
+      <li><strong>Name:</strong> {{ user.name }}</li>
+      <li><strong>Email:</strong> {{ user.email }}</li>
+    </ul>
+
+    <h3>Your Donations</h3>
+    <ul *ngIf="donations.length > 0; else noDonations">
+      <li *ngFor="let donation of donations">
+        💖 {{ donation.amount | currency }} on
+        {{ donation.date | date : "mediumDate" }}
+      </li>
+    </ul>
+    <ng-template #noDonations>
+      <p>You haven't donated yet. 🙁</p>
+    </ng-template>
+
+    
+  </div>
 </section>

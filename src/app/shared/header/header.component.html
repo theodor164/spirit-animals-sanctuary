@@ -28,6 +28,12 @@
       <a mat-button routerLink="/contact" routerLinkActive="active-link"
         >Contact</a
       >
+      <button *ngIf="isLoggedIn()" (click)="logout()" mat-button>
+        Logout
+      </button>
+      <button *ngIf="!isLoggedIn()" routerLink="/login" mat-button>
+        Login
+      </button>
     </nav>
     <button
       type="button"

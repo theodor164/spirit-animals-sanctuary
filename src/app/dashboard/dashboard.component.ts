@@ -1,8 +1,9 @@
 import { NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { loadStripe, Stripe } from '@stripe/stripe-js'; // Import Stripe
 
 interface User {
   id: number;
@@ -22,14 +23,19 @@ interface Donation {
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   message = '';
   user: User | null = null;
   donations: Donation[] = [];
-  donationAmount: number = 0;
+  donationAmount: number = 10; // Default donation amount
   showDonationForm: boolean = false;
+  stripePromise: Promise<Stripe | null>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.stripePromise = loadStripe(
+      'pk_test_51OHSZJJtqR3ifyMoetq4CdyKvrTWgozhmSdkf26pNrcjAqi5tNYmlSBmz8DRit8MHkuqBjPMpa5ouL9vawlgCv1r00RytXbZ9S'
+    );
+  }
 
   toggleDonationForm() {
     this.showDonationForm = !this.showDonationForm;
@@ -37,23 +43,34 @@ export class DashboardComponent {
 
   submitDonation() {
     if (this.donationAmount <= 0) {
+      this.message = 'Please enter a valid amount.';
       return;
     }
 
-    this.http.post('http://localhost:3000/api/donations', {
-      amount: this.donationAmount,
-    }).subscribe({
-      next: () => {
-        this.message = 'Thamk you for your donation!';
-        this.donationAmount = 0;
-        this.showDonationForm = false;
-        // Optionally, you can refresh the donations list
-        this.ngOnInit();
-      },
-      error: (error) => {
-        this.message = 'Donation failed: ' + error.message;
-      }
-    });
+    
+
+    // This is the equivalent of the fetch call in Angular
+    this.http
+      .post<{ id: string }>(
+        'http://localhost:3000/api/create-checkout-session',
+        {
+          amount: this.donationAmount,
+        }
+      )
+      .subscribe({
+        next: async (session) => {
+          const stripe = await this.stripePromise;
+          if (stripe) {
+            // Redirect to Stripe Checkout
+            stripe.redirectToCheckout({ sessionId: session.id });
+          } else {
+            this.message = 'Stripe could not be loaded.';
+          }
+        },
+        error: (error) => {
+          this.message = 'Failed to create checkout session: ' + error.message;
+        },
+      });
   }
 
   ngOnInit() {

@@ -26,4 +26,19 @@
       <li><a routerLink="/adopt">Sponsor an Animal</a></li>
     </ul>
   </section>
+
+  <section class="donation-ranking">
+  <h2>Top Donors 💖</h2>
+  <ul *ngIf="ranking.length > 0; else noRanking">
+    <li *ngFor="let donor of ranking; let i = index">
+      <span class="rank">#{{ i + 1 }}</span>
+      <span class="name">{{ donor.name }}</span>
+      <span class="amount">{{ donor.total | currency }}</span>
+    </li>
+  </ul>
+  <ng-template #noRanking>
+    <p>No donations yet. Be the first to support!</p>
+  </ng-template>
+</section>
+
 </section>

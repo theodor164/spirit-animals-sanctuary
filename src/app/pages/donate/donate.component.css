@@ -63,3 +63,44 @@
   margin: 0.5rem 0;
   font-weight: 500;
 }
+
+.donation-ranking {
+  margin-top: 40px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.donation-ranking h2 {
+  margin-bottom: 20px;
+  color: #444;
+  text-align: center;
+}
+
+.donation-ranking ul {
+  list-style: none;
+  padding: 0;
+}
+
+.donation-ranking li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.donation-ranking .rank {
+  font-weight: bold;
+  color: #ff6b6b;
+  width: 40px;
+}
+
+.donation-ranking .name {
+  flex: 1;
+  text-align: left;
+}
+
+.donation-ranking .amount {
+  font-weight: bold;
+}

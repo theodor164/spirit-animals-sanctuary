@@ -62,6 +62,15 @@
       >Contact</a
     >
     <button
+      routerLink="/dashboard"
+      *ngIf="isLoggedIn()"
+      mat-button
+      (click)="drawer.close()"
+      routerLinkActive="active-link"
+    >
+      Dashboard
+    </button>
+    <button
       routerLink="/login"
       *ngIf="isLoggedIn()"
       (click)="logout()"

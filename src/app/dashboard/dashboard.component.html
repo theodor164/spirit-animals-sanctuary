@@ -20,6 +20,27 @@
       <p>You haven't donated yet. 🙁</p>
     </ng-template>
 
-    
+    <button (click)="toggleDonationForm()" class="donate-button">
+      Make a Donation
+    </button>
+
+    <form
+      *ngIf="showDonationForm"
+      (ngSubmit)="submitDonation()"
+      #donationForm="ngForm"
+      class="donation-form"
+    >
+      <label for="amount">Donation Amount</label>
+      <input
+        type="number"
+        id="amount"
+        name="amount"
+        required
+        [(ngModel)]="donationAmount"
+        min="1"
+      />
+
+      <button type="submit">Donate</button>
+    </form>
   </div>
 </section>

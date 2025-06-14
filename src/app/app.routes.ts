@@ -12,6 +12,7 @@ import { DonateOnceComponent } from './pages/donate-once/donate-once.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component'; // Import the new component
 import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: 'donate/once', component: DonateOnceComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'verify-email', component: VerifyEmailComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

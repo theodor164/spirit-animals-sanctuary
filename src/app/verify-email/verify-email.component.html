@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="card">
+    <h2>Email Verification</h2>
+
+    <!-- Show a loading spinner or message while processing -->
+    <div *ngIf="isLoading">
+      <p>Please wait while we verify your account...</p>
+      <!-- You could add a spinner animation here -->
+    </div>
+
+    <!-- Show the final message (success or error) -->
+    <div *ngIf="!isLoading">
+      <!-- Add a class based on success or error for styling -->
+      <p [class.success]="!isError" [class.error]="isError">
+        {{ message }}
+      </p>
+
+      <!-- Optionally, show a link to the login page on success -->
+      <a *ngIf="!isError" routerLink="/login" class="login-link">
+        Proceed to Login
+      </a>
+    </div>
+  </div>
+</div>

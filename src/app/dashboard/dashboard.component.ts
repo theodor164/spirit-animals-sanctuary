@@ -38,10 +38,57 @@ export class DashboardComponent implements OnInit {
   // To check if we should show the "Manage Billing" button
   hasSubscriptions: boolean = false;
 
+  // --- NEW: Properties for the change password form ---
+  changePasswordData = {
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
+  };
+
   constructor(private http: HttpClient) {
     this.stripePromise = loadStripe(
       'pk_test_51OHSZJJtqR3ifyMoetq4CdyKvrTWgozhmSdkf26pNrcjAqi5tNYmlSBmz8DRit8MHkuqBjPMpa5ouL9vawlgCv1r00RytXbZ9S'
     );
+  }
+
+  // --- NEW: Method to handle password change ---
+  changePassword() {
+    this.message = ''; // Clear previous messages
+    if (
+      this.changePasswordData.newPassword !==
+      this.changePasswordData.confirmNewPassword
+    ) {
+      this.message = 'New passwords do not match.';
+      return;
+    }
+    if (this.changePasswordData.newPassword.length < 6) {
+      this.message = 'New password must be at least 6 characters long.';
+      return;
+    }
+
+    this.http
+      .post<{ message: string }>(
+        'http://localhost:3000/api/user/change-password',
+        {
+          currentPassword: this.changePasswordData.currentPassword,
+          newPassword: this.changePasswordData.newPassword,
+        }
+      )
+      .subscribe({
+        next: (response) => {
+          this.message = response.message;
+          // Clear the form fields on success
+          this.changePasswordData = {
+            currentPassword: '',
+            newPassword: '',
+            confirmNewPassword: '',
+          };
+        },
+        error: (err) => {
+          this.message =
+            err.error?.errors?.[0]?.msg || 'Failed to change password.';
+        },
+      });
   }
 
   redirectToCustomerPortal() {

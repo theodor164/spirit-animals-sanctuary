@@ -9,6 +9,48 @@
       <li><strong>Email:</strong> {{ user.email }}</li>
     </ul>
 
+    <!-- NEW: Change Password Form -->
+    <hr />
+    <h3>Change Your Password</h3>
+    <form
+      (ngSubmit)="changePassword()"
+      #changePasswordForm="ngForm"
+      class="donation-form"
+    >
+      <div class="form-group">
+        <label for="currentPassword">Current Password</label>
+        <input
+          type="password"
+          id="currentPassword"
+          name="currentPassword"
+          required
+          [(ngModel)]="changePasswordData.currentPassword"
+        />
+      </div>
+      <div class="form-group">
+        <label for="newPassword">New Password</label>
+        <input
+          type="password"
+          id="newPassword"
+          name="newPassword"
+          required
+          [(ngModel)]="changePasswordData.newPassword"
+        />
+      </div>
+      <div class="form-group">
+        <label for="confirmNewPassword">Confirm New Password</label>
+        <input
+          type="password"
+          id="confirmNewPassword"
+          name="confirmNewPassword"
+          required
+          [(ngModel)]="changePasswordData.confirmNewPassword"
+        />
+      </div>
+      <button type="submit">Update Password</button>
+    </form>
+    <hr />
+
     <h3>Your Subscriptions</h3>
 
     <!-- Show a "Manage Billing" button if the user might have subscriptions -->

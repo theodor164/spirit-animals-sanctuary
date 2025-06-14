@@ -17,6 +17,30 @@ interface Donation {
   date: string;
 }
 
+// NEW, CORRECTED INTERFACE
+interface StripeSubscription {
+  id: string;
+  status: string;
+  current_period_end: number;
+  // The 'plan' object is now at the top level of the subscription
+  plan: {
+    product: {
+      name: string;
+    };
+  };
+  // We keep 'items' in case Stripe still sends it
+  items: {
+    data: any[];
+  };
+}
+
+interface DbSubscription {
+  stripe_subscription_id: string;
+  status: string;
+  created_at: string;
+  cancelled_at: string | null;
+}
+
 @Component({
   selector: 'app-dashboard',
   imports: [NgIf, NgFor, CommonModule, FormsModule],
@@ -30,6 +54,11 @@ export class DashboardComponent implements OnInit {
   donationAmount: number = 10; // Default donation amount
   showDonationForm: boolean = false;
   stripePromise: Promise<Stripe | null>;
+  subscriptions: any[] = [];
+
+  // Updated state to hold both subscription types
+  stripeSubscriptions: StripeSubscription[] = [];
+  dbSubscriptions: DbSubscription[] = [];
 
   constructor(private http: HttpClient) {
     this.stripePromise = loadStripe(
@@ -41,13 +70,66 @@ export class DashboardComponent implements OnInit {
     this.showDonationForm = !this.showDonationForm;
   }
 
+  startSubscription() {
+    this.http
+      .post<{ id: string }>(
+        'http://localhost:3000/api/create-subscription-session',
+        {}
+      )
+      .subscribe({
+        next: async (session) => {
+          const stripe = await this.stripePromise;
+          if (stripe) {
+            stripe.redirectToCheckout({ sessionId: session.id });
+          }
+        },
+        error: (err) => {
+          this.message = 'Subscription failed: ' + err.message;
+        },
+      });
+  }
+
+  getSubscriptions() {
+    this.http
+      .get<{
+        subscriptions: StripeSubscription[];
+        dbSubscriptions: DbSubscription[];
+      }>('http://localhost:3000/api/subscriptions')
+      .subscribe({
+        next: (res) => {
+          this.stripeSubscriptions = res.subscriptions;
+          this.dbSubscriptions = res.dbSubscriptions;
+        },
+        error: (err) => {
+          console.error('Error fetching subscriptions:', err.message);
+        },
+      });
+  }
+
+  cancelSubscription(subscriptionId: string) {
+    this.http
+      .post('http://localhost:3000/api/subscriptions/cancel', {
+        subscriptionId,
+      })
+      .subscribe({
+        next: () => {
+          this.getSubscriptions(); // Refresh list
+          this.stripeSubscriptions = this.stripeSubscriptions.filter(
+            (sub) => sub.id !== subscriptionId
+          );
+          this.message = 'Subscription cancelled successfully.';
+        },
+        error: (err) => {
+          console.error('Failed to cancel:', err.message);
+        },
+      });
+  }
+
   submitDonation() {
     if (this.donationAmount <= 0) {
       this.message = 'Please enter a valid amount.';
       return;
     }
-
-    
 
     // This is the equivalent of the fetch call in Angular
     this.http
@@ -83,6 +165,9 @@ export class DashboardComponent implements OnInit {
           this.message = response.message;
           this.user = response.user;
           this.donations = response.donations;
+          if (this.user) {
+            this.getSubscriptions(); // Fetch subscriptions for the user
+          }
         },
         error: (error) => {
           this.message = 'Access denied or error occured' + error.message;

@@ -9,6 +9,28 @@
       <li><strong>Email:</strong> {{ user.email }}</li>
     </ul>
 
+    <h3>Your Active Subscriptions</h3>
+
+    <!-- Check the correct array: stripeSubscriptions -->
+    <div *ngIf="!stripeSubscriptions || stripeSubscriptions.length === 0">
+      <p>You have no active subscriptions.</p>
+    </div>
+
+    <!-- Loop over the correct array: stripeSubscriptions -->
+    <div *ngFor="let sub of stripeSubscriptions" class="subscription-item">
+      <!-- The path to the plan name is different in the Stripe API response -->
+      <p><strong>Plan:</strong> {{ sub.plan.product.name }}</p>
+      <p><strong>Status:</strong> {{ sub.status }}</p>
+
+      <!-- It's good practice to only show the cancel button if it's possible to cancel -->
+      <button
+        *ngIf="sub.status === 'active' || sub.status === 'trialing'"
+        (click)="cancelSubscription(sub.id)"
+      >
+        Cancel
+      </button>
+    </div>
+
     <h3>Your Donations</h3>
     <ul *ngIf="donations.length > 0; else noDonations">
       <li *ngFor="let donation of donations">
@@ -22,6 +44,10 @@
 
     <button (click)="toggleDonationForm()" class="donate-button">
       Make a Donation
+    </button>
+
+    <button (click)="startSubscription()" class="donate-button">
+      Donate Monthly
     </button>
 
     <form

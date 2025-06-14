@@ -2,6 +2,7 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-donate',
@@ -12,7 +13,11 @@ import { RouterModule } from '@angular/router';
 export class DonateComponent {
   ranking: { name: string; total: number }[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 
   ngOnInit() {
     this.http

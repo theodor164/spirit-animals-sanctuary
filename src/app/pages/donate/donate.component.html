@@ -8,12 +8,14 @@
     <div class="donate-box">
       <h2>Donate Monthly</h2>
       <p>Become a guardian angel by giving regularly.</p>
-      <a routerLink="/donate/monthly" class="donate-button">Monthly Donation</a>
+      <a *ngIf="!isLoggedIn()" routerLink="/login" class="donate-button">Monthly Donation</a>
+      <a *ngIf="isLoggedIn()" routerLink="/dashboard" class="donate-button">Monthly Donation</a>
     </div>
     <div class="donate-box">
       <h2>One-Time Donation</h2>
       <p>Every contribution makes a difference.</p>
-      <a routerLink="/donate/once" class="donate-button">Donate Now</a>
+      <a *ngIf="!isLoggedIn()" routerLink="/donate/once" class="donate-button">Donate Now</a>
+      <a *ngIf="isLoggedIn()" routerLink="/dashboard" class="donate-button">Donate Now</a>
     </div>
   </section>
 

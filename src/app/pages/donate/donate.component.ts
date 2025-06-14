@@ -1,32 +1,18 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-donate',
-  imports: [RouterModule, NgIf, NgFor, CommonModule],
+  imports: [RouterModule, NgIf, CommonModule],
   templateUrl: './donate.component.html',
   styleUrl: './donate.component.css',
 })
 export class DonateComponent {
-  ranking: { name: string; total: number }[] = [];
-
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
-  }
-
-  ngOnInit() {
-    this.http
-      .get<{ name: string; total: number }[]>(
-        'http://localhost:3000/api/donations/ranking'
-      )
-      .subscribe({
-        next: (data) => (this.ranking = data),
-        error: (error) => console.error('Failed to load ranking', error),
-      });
   }
 }

@@ -1,6 +1,5 @@
 <section class="page-container">
   <h2>Welcome to your Dashboard!</h2>
-  <!-- We'll use this paragraph to show success/error messages -->
   <p *ngIf="message">{{ message }}</p>
 
   <div class="user-info" *ngIf="user">
@@ -11,19 +10,23 @@
     </ul>
 
     <h3>Your Subscriptions</h3>
-    <div *ngIf="!stripeSubscriptions || stripeSubscriptions.length === 0">
-      <p>You have no active subscriptions.</p>
-    </div>
-    <div *ngFor="let sub of stripeSubscriptions" class="subscription-item">
-      <p><strong>Plan:</strong> {{ sub.plan.product.name }}</p>
-      <p><strong>Status:</strong> {{ sub.status }}</p>
+
+    <!-- Show a "Manage Billing" button if the user might have subscriptions -->
+    <div *ngIf="hasSubscriptions">
+      <p>Click below to manage your payment methods and recurring donations.</p>
       <button
-        *ngIf="sub.status === 'active' || sub.status === 'trialing'"
-        (click)="cancelSubscription(sub.id)"
+        (click)="redirectToCustomerPortal()"
+        class="manage-billing-button"
       >
-        Cancel
+        Manage Billing & Subscriptions
       </button>
     </div>
+
+    <div *ngIf="!hasSubscriptions">
+      <p>You have no active subscriptions.</p>
+    </div>
+
+    <!-- DELETED the *ngFor block that listed subscriptions -->
 
     <h3>Your Donations</h3>
     <ul *ngIf="donations.length > 0; else noDonations">
@@ -39,8 +42,6 @@
     <hr />
 
     <h3>Make a Donation</h3>
-
-    <!-- One-Time Donation Form -->
     <form
       (ngSubmit)="submitDonation()"
       #donationForm="ngForm"
@@ -58,7 +59,6 @@
       <button type="submit">Donate Now</button>
     </form>
 
-    <!-- NEW: Monthly Subscription Form -->
     <form
       (ngSubmit)="startSubscription()"
       #subscriptionForm="ngForm"

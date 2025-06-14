@@ -1,9 +1,12 @@
-import { NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common'; // Combined imports
 import { FormsModule } from '@angular/forms';
-import { loadStripe, Stripe } from '@stripe/stripe-js'; // Import Stripe
+import { loadStripe, Stripe } from '@stripe/stripe-js';
+
+// --- These interfaces are no longer needed here ---
+// interface StripeSubscription { ... }
+// interface DbSubscription { ... }
 
 interface User {
   id: number;
@@ -17,29 +20,9 @@ interface Donation {
   date: string;
 }
 
-interface StripeSubscription {
-  id: string;
-  status: string;
-  current_period_end: number;
-  plan: {
-    product: {
-      name: string;
-    };
-  };
-  items: {
-    data: any[];
-  };
-}
-
-interface DbSubscription {
-  stripe_subscription_id: string;
-  status: string;
-  created_at: string;
-  cancelled_at: string | null;
-}
-
 @Component({
   selector: 'app-dashboard',
+  // standalone: true // If you use standalone components, keep this
   imports: [NgIf, NgFor, CommonModule, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
@@ -49,14 +32,11 @@ export class DashboardComponent implements OnInit {
   user: User | null = null;
   donations: Donation[] = [];
   donationAmount: number = 10;
-  showDonationForm: boolean = false;
+  subscriptionAmount: number = 25;
   stripePromise: Promise<Stripe | null>;
 
-  // NEW: Property for the custom monthly donation amount
-  subscriptionAmount: number = 25; // Default monthly amount
-
-  stripeSubscriptions: StripeSubscription[] = [];
-  dbSubscriptions: DbSubscription[] = [];
+  // To check if we should show the "Manage Billing" button
+  hasSubscriptions: boolean = false;
 
   constructor(private http: HttpClient) {
     this.stripePromise = loadStripe(
@@ -64,22 +44,33 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  toggleDonationForm() {
-    this.showDonationForm = !this.showDonationForm;
+  redirectToCustomerPortal() {
+    this.http
+      .post<{ url: string }>(
+        'http://localhost:3000/api/create-customer-portal-session',
+        {}
+      )
+      .subscribe({
+        next: (session) => {
+          window.location.href = session.url;
+        },
+        error: (err) => {
+          this.message =
+            'Could not open the billing portal. Please try again later.';
+          console.error('Portal session error:', err);
+        },
+      });
   }
 
   startSubscription() {
-    // Frontend check for minimum amount
     if (!this.subscriptionAmount || this.subscriptionAmount < 5) {
       this.message = 'Monthly donation must be at least 5 RON.';
       return;
     }
-
-    // UPDATED: Send the custom amount in the request body
     this.http
       .post<{ id: string }>(
         'http://localhost:3000/api/create-subscription-session',
-        { amount: this.subscriptionAmount } // Send custom amount
+        { amount: this.subscriptionAmount }
       )
       .subscribe({
         next: async (session) => {
@@ -89,7 +80,6 @@ export class DashboardComponent implements OnInit {
           }
         },
         error: (err) => {
-          // This will now catch validation errors from the backend too
           this.message =
             err.error?.errors?.[0]?.msg ||
             'Subscription failed: ' + err.message;
@@ -97,38 +87,9 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  getSubscriptions() {
-    this.http
-      .get<{
-        subscriptions: StripeSubscription[];
-        dbSubscriptions: DbSubscription[];
-      }>('http://localhost:3000/api/subscriptions')
-      .subscribe({
-        next: (res) => {
-          this.stripeSubscriptions = res.subscriptions;
-          this.dbSubscriptions = res.dbSubscriptions;
-        },
-        error: (err) => {
-          console.error('Error fetching subscriptions:', err.message);
-        },
-      });
-  }
+  // DELETED getSubscriptions() method
 
-  cancelSubscription(subscriptionId: string) {
-    this.http
-      .post('http://localhost:3000/api/subscriptions/cancel', {
-        subscriptionId,
-      })
-      .subscribe({
-        next: () => {
-          this.getSubscriptions();
-          this.message = 'Subscription cancelled successfully.';
-        },
-        error: (err) => {
-          console.error('Failed to cancel:', err.message);
-        },
-      });
-  }
+  // DELETED cancelSubscription() method
 
   submitDonation() {
     if (this.donationAmount <= 0) {
@@ -159,17 +120,22 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    // We now fetch the donations and check for a stripe_customer_id
+    // to decide if the "Manage Billing" button should appear.
     this.http
-      .get<{ message: string; user: User; donations: Donation[] }>(
-        'http://localhost:3000/api/user/dashboard'
-      )
+      .get<{
+        message: string;
+        user: User & { stripe_customer_id?: string };
+        donations: Donation[];
+      }>('http://localhost:3000/api/user/dashboard')
       .subscribe({
         next: (response) => {
           this.message = response.message;
           this.user = response.user;
           this.donations = response.donations;
-          if (this.user) {
-            this.getSubscriptions();
+          // Check if the user has a stripe_customer_id. If so, they might have subscriptions.
+          if (response.user && response.user.stripe_customer_id) {
+            this.hasSubscriptions = true;
           }
         },
         error: (error) => {

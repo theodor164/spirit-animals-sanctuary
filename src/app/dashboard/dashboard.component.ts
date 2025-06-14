@@ -17,18 +17,15 @@ interface Donation {
   date: string;
 }
 
-// NEW, CORRECTED INTERFACE
 interface StripeSubscription {
   id: string;
   status: string;
   current_period_end: number;
-  // The 'plan' object is now at the top level of the subscription
   plan: {
     product: {
       name: string;
     };
   };
-  // We keep 'items' in case Stripe still sends it
   items: {
     data: any[];
   };
@@ -51,12 +48,13 @@ export class DashboardComponent implements OnInit {
   message = '';
   user: User | null = null;
   donations: Donation[] = [];
-  donationAmount: number = 10; // Default donation amount
+  donationAmount: number = 10;
   showDonationForm: boolean = false;
   stripePromise: Promise<Stripe | null>;
-  subscriptions: any[] = [];
 
-  // Updated state to hold both subscription types
+  // NEW: Property for the custom monthly donation amount
+  subscriptionAmount: number = 25; // Default monthly amount
+
   stripeSubscriptions: StripeSubscription[] = [];
   dbSubscriptions: DbSubscription[] = [];
 
@@ -71,10 +69,17 @@ export class DashboardComponent implements OnInit {
   }
 
   startSubscription() {
+    // Frontend check for minimum amount
+    if (!this.subscriptionAmount || this.subscriptionAmount < 5) {
+      this.message = 'Monthly donation must be at least 5 RON.';
+      return;
+    }
+
+    // UPDATED: Send the custom amount in the request body
     this.http
       .post<{ id: string }>(
         'http://localhost:3000/api/create-subscription-session',
-        {}
+        { amount: this.subscriptionAmount } // Send custom amount
       )
       .subscribe({
         next: async (session) => {
@@ -84,7 +89,10 @@ export class DashboardComponent implements OnInit {
           }
         },
         error: (err) => {
-          this.message = 'Subscription failed: ' + err.message;
+          // This will now catch validation errors from the backend too
+          this.message =
+            err.error?.errors?.[0]?.msg ||
+            'Subscription failed: ' + err.message;
         },
       });
   }
@@ -113,10 +121,7 @@ export class DashboardComponent implements OnInit {
       })
       .subscribe({
         next: () => {
-          this.getSubscriptions(); // Refresh list
-          this.stripeSubscriptions = this.stripeSubscriptions.filter(
-            (sub) => sub.id !== subscriptionId
-          );
+          this.getSubscriptions();
           this.message = 'Subscription cancelled successfully.';
         },
         error: (err) => {
@@ -131,7 +136,6 @@ export class DashboardComponent implements OnInit {
       return;
     }
 
-    // This is the equivalent of the fetch call in Angular
     this.http
       .post<{ id: string }>(
         'http://localhost:3000/api/create-checkout-session',
@@ -143,7 +147,6 @@ export class DashboardComponent implements OnInit {
         next: async (session) => {
           const stripe = await this.stripePromise;
           if (stripe) {
-            // Redirect to Stripe Checkout
             stripe.redirectToCheckout({ sessionId: session.id });
           } else {
             this.message = 'Stripe could not be loaded.';
@@ -166,7 +169,7 @@ export class DashboardComponent implements OnInit {
           this.user = response.user;
           this.donations = response.donations;
           if (this.user) {
-            this.getSubscriptions(); // Fetch subscriptions for the user
+            this.getSubscriptions();
           }
         },
         error: (error) => {

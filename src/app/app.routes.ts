@@ -13,6 +13,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component'; // Import the new component
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'; // Import the new component
+import { ResetPasswordComponent } from './reset-password/reset-password.component'; // Import
 import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
@@ -28,6 +30,8 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'verify-email', component: VerifyEmailComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

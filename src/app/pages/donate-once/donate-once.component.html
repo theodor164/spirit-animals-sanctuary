@@ -34,7 +34,7 @@
 
     <div class="donate-form">
       <h2>Your Information</h2>
-      <form (submit)="submitDonation()">
+      <form #donateForm="ngForm">
         <label>
           Full Name:
           <input type="text" [(ngModel)]="form.name" name="name" required />
@@ -48,7 +48,22 @@
           <p><strong>Donation:</strong> €{{ selectedAmount || 0 }}</p>
         </div>
 
-        <button type="submit">Donate Now</button>
+        <!-- NEW: reCAPTCHA Component -->
+        <div class="form-group captcha-container">
+          <ngx-invisible-recaptcha
+            #captchaElem
+            [siteKey]="recaptchaSiteKey"
+            (success)="handleRecaptchaSuccess($event)"
+          >
+          </ngx-invisible-recaptcha>
+        </div>
+
+        <div class="error" *ngIf="message">{{ message }}</div>
+
+        <!-- UPDATED: Changed to a (click) event -->
+        <button type="button" (click)="handleDonationClick(donateForm)">
+          Donate Now
+        </button>
       </form>
     </div>
   </section>

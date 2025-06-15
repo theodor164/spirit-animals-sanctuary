@@ -1,6 +1,6 @@
 <section class="page-container">
   <h2>Create an Account</h2>
-  <form (ngSubmit)="onSubmit(registerForm)" #registerForm="ngForm" novalidate>
+  <form #registerForm="ngForm" novalidate>
     <!-- Name -->
     <label for="name">Full Name</label>
     <input
@@ -82,14 +82,24 @@
       <div *ngIf="!passwordsMatch">Passwords do not match.</div>
     </div>
 
+    <div class="form-group captcha-container">
+      <!-- UPDATED: Added #captchaElem and (success) event binding -->
+      <ngx-invisible-recaptcha
+        #captchaElem
+        [siteKey]="recaptchaSiteKey"
+        (success)="handleRecaptchaSuccess($event)"
+      >
+      </ngx-invisible-recaptcha>
+    </div>
+
     <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
     <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 
     <button
-      type="submit"
-      [disabled]="
-        registerForm.invalid || !passwordsMatch || !registerForm.dirty
-      "
+      type="button"
+      (click)="handleRegistrationClick(registerForm)"
+      [disabled]="registerForm.invalid || !passwordsMatch"
+      class="register-button"
     >
       Register
     </button>

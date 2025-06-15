@@ -26,7 +26,7 @@ import { AuthService } from './auth.service';
     MatButtonModule,
     RouterLink,
     RouterModule,
-    NgIf
+    NgIf,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

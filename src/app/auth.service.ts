@@ -7,6 +7,7 @@ interface RegisterData {
   name: string;
   email: string;
   password: string;
+  recaptcha?: string; // The token from the form
 }
 
 interface LoginData {
@@ -33,8 +34,15 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  register(data: RegisterData): Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/register`, data);
+  register(data: RegisterData): Observable<any> {
+    // --- FIX: Create the correct payload for the backend ---
+    const payload = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      recaptchaToken: data.recaptcha, // Pass the token under the correct property name
+    };
+    return this.http.post<any>(`${this.baseUrl}/register`, payload);
   }
 
   login(data: LoginData): Observable<AuthResponse> {

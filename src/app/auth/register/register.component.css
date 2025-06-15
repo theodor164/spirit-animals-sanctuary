@@ -46,7 +46,7 @@ input[type="password"]:focus {
   box-shadow: 0 0 6px rgba(40, 167, 69, 0.4);
 }
 
-button[type="submit"] {
+button[type="button"] {
   width: 100%;
   padding: 14px 0;
   background-color: #28a745; /* green button */
@@ -59,11 +59,11 @@ button[type="submit"] {
   transition: background-color 0.25s ease;
 }
 
-button[type="submit"]:hover:not(:disabled) {
+button[type="button"]:hover:not(:disabled) {
   background-color: #1e7e34;
 }
 
-button[type="submit"]:disabled {
+button[type="button"]:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }

@@ -10,8 +10,20 @@
     <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
     <button type="submit" [disabled]="!loginForm.valid">Login</button>
     <button type="button" routerLink="/register">Register</button>
+    <div class="or-divider">
+      <span>OR</span>
+    </div>
+
+    <!-- NEW: Google Sign-In Button -->
+    <a href="http://localhost:3000/api/auth/google" class="google-btn">
+      <img
+        src="https://developers.google.com/identity/images/g-logo.png"
+        alt="Google logo"
+      />
+      Sign in with Google
+    </a>
+    <div class="form-footer">
+      <a routerLink="/forgot-password">Forgot your password?</a>
+    </div>
   </form>
-  <div class="form-footer">
-    <a routerLink="/forgot-password">Forgot your password?</a>
-  </div>
 </section>

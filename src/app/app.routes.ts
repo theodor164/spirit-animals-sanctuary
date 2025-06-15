@@ -15,6 +15,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component'; // Import the new component
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'; // Import the new component
 import { ResetPasswordComponent } from './reset-password/reset-password.component'; // Import
+import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
   { path: 'verify-email', component: VerifyEmailComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'auth/callback', component: AuthCallbackComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

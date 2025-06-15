@@ -1,5 +1,5 @@
 <section class="login-wrapper">
-  <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="login-form">
+  <form #loginForm="ngForm" class="login-form">
     <h2>Welcome Back</h2>
 
     <label for="email">Email</label>
@@ -12,9 +12,26 @@
       <a routerLink="/forgot-password">Forgot your password?</a>
     </div>
 
+    <!-- NEW: reCAPTCHA Component -->
+    <div class="form-group captcha-container">
+      <ngx-invisible-recaptcha
+        #captchaElem
+        [siteKey]="recaptchaSiteKey"
+        (success)="handleRecaptchaSuccess($event)"
+      >
+      </ngx-invisible-recaptcha>
+    </div>
+
     <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+    <!-- UPDATED: Changed to a (click) event -->
+    <button
+      type="button"
+      (click)="handleLoginClick(loginForm)"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
     <button type="button" routerLink="/register" class="secondary-btn">
       Register
     </button>

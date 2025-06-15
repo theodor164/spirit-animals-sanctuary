@@ -13,6 +13,7 @@ interface RegisterData {
 interface LoginData {
   email: string;
   password: string;
+  recaptcha?: string;
 }
 
 interface User {
@@ -45,8 +46,14 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}/register`, payload);
   }
 
+  // --- UPDATED: login method ---
   login(data: LoginData): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, data);
+    const payload = {
+      email: data.email,
+      password: data.password,
+      recaptchaToken: data.recaptcha, // Pass the token under the correct property name
+    };
+    return this.http.post<AuthResponse>(`${this.baseUrl}/login`, payload);
   }
 
   saveToken(token: string) {

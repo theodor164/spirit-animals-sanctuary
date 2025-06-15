@@ -1,38 +1,60 @@
-import { NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgIf, CommonModule } from '@angular/common';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { NgxCaptchaModule, InvisibleReCaptchaComponent } from 'ngx-captcha';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, NgIf, RouterLink],
+  standalone: true,
+  imports: [CommonModule, FormsModule, NgIf, RouterLink, NgxCaptchaModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
+  @ViewChild('captchaElem') captchaElem!: InvisibleReCaptchaComponent;
+
   errorMessage: string | null = null;
+  private formData: NgForm | null = null;
+
+  recaptchaSiteKey = '6Ldr-2ErAAAAADW1yRNfbiY1Wu3LI_UYXRg2v2Q2'; // Replace with your key
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit(form: NgForm) {
-    if (form.valid) {
-      const { email, password } = form.value;
-      this.authService.login(form.value).subscribe({
-        next: (response) => {
-          // Save token or user data to localStorage/sessionStorage here
-          this.errorMessage = null;
-          console.log('Login successful:', response);
-          // TODO: navigate to dashboard or home page
-          this.authService.saveToken(response.token);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (error) => {
-          this.errorMessage =
-            error.message || 'Login failed. Please try again.';
-          console.error('Login error:', this.errorMessage);
-        },
-      });
+  handleLoginClick(form: NgForm) {
+    this.errorMessage = null;
+
+    if (form.invalid) {
+      this.errorMessage = 'Please enter a valid email and password.';
+      return;
     }
+
+    this.formData = form;
+    this.captchaElem.execute();
+  }
+
+  handleRecaptchaSuccess(token: string) {
+    if (!this.formData) {
+      return;
+    }
+
+    const loginData = {
+      ...this.formData.value,
+      recaptcha: token,
+    };
+
+    this.authService.login(loginData).subscribe({
+      next: (response) => {
+        this.authService.saveToken(response.token);
+        this.router.navigate(['/dashboard']);
+      },
+      error: (error) => {
+        this.errorMessage =
+          error.error?.errors?.[0]?.msg ||
+          'Login failed. Please check your credentials.';
+        this.captchaElem.resetCaptcha(); // Reset captcha on error
+      },
+    });
   }
 }

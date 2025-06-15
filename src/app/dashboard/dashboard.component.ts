@@ -8,10 +8,12 @@ import { loadStripe, Stripe } from '@stripe/stripe-js';
 // interface StripeSubscription { ... }
 // interface DbSubscription { ... }
 
+// --- FIX: Update the User interface ---
 interface User {
   id: number;
   name: string;
   email: string;
+  hasLocalPassword?: boolean; // This property is now expected
 }
 
 interface Donation {
@@ -167,12 +169,11 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    // We now fetch the donations and check for a stripe_customer_id
-    // to decide if the "Manage Billing" button should appear.
+    // FIX: Update the expected user object type
     this.http
       .get<{
         message: string;
-        user: User & { stripe_customer_id?: string };
+        user: User & { stripe_customer_id?: string }; // User will now have hasLocalPassword
         donations: Donation[];
       }>('http://localhost:3000/api/user/dashboard')
       .subscribe({
@@ -180,7 +181,6 @@ export class DashboardComponent implements OnInit {
           this.message = response.message;
           this.user = response.user;
           this.donations = response.donations;
-          // Check if the user has a stripe_customer_id. If so, they might have subscriptions.
           if (response.user && response.user.stripe_customer_id) {
             this.hasSubscriptions = true;
           }

@@ -1,9 +1,10 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="main-toolbar">
   <div class="toolbar-content">
-    <span class="title">Spirit Animals Sanctuary</span>
+    <a routerLink="/" class="title">Spirit Animals Sanctuary</a>
 
     <span class="spacer"></span>
 
+    <!-- Desktop Navigation -->
     <nav class="nav-links">
       <a
         mat-button
@@ -16,32 +17,44 @@
         >Our Story</a
       >
       <a mat-button routerLink="/animals" routerLinkActive="active-link"
-        >Animals</a
+        >Our Animals</a
       >
-      <a mat-button routerLink="/adopt" routerLinkActive="active-link">Adopt</a>
-      <a mat-button routerLink="/donate" routerLinkActive="active-link"
-        >Donate</a
-      >
-      <a mat-button routerLink="/volunteer" routerLinkActive="active-link"
-        >Volunteer</a
-      >
+
+      <!-- NEW: "Get Involved" Dropdown Menu -->
+      <button mat-button [matMenuTriggerFor]="getInvolvedMenu">
+        Get Involved
+      </button>
+      <mat-menu #getInvolvedMenu="matMenu">
+        <a mat-menu-item routerLink="/get-involved/adopt">Adopt</a>
+        <a mat-menu-item routerLink="/get-involved/volunteer">Volunteer</a>
+      </mat-menu>
+
       <a mat-button routerLink="/contact" routerLinkActive="active-link"
         >Contact</a
       >
 
-      <button
-        *ngIf="isLoggedIn()"
-        routerLink="/dashboard"
-        mat-button
-        routerLinkActive="active-link"
-      >
-        Dashboard
-      </button>
-      <button *ngIf="isLoggedIn()" (click)="logout()" mat-button>Logout</button>
-      <button *ngIf="!isLoggedIn()" routerLink="/login" mat-button>
-        Login
-      </button>
+      <!-- User Authentication Links -->
+      <ng-container *ngIf="isLoggedIn(); else loggedOut">
+        <a mat-button routerLink="/dashboard" routerLinkActive="active-link"
+          >Dashboard</a
+        >
+        <a mat-button (click)="logout()">Logout</a>
+      </ng-container>
+      <ng-template #loggedOut>
+        <a mat-button routerLink="/login">Login</a>
+      </ng-template>
     </nav>
+
+    <!-- NEW: Prominent Donate Button -->
+    <a
+      mat-raised-button
+      color="accent"
+      routerLink="/donate"
+      class="donate-button"
+      >Donate</a
+    >
+
+    <!-- Mobile Menu Button -->
     <button
       type="button"
       mat-icon-button

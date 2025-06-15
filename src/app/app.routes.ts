@@ -17,6 +17,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component'; // Import
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { AuthGuard } from './auth/auth.guard';
+import { GetInvolvedComponent } from './pages/get-involved/get-involved.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +26,15 @@ export const routes: Routes = [
   { path: 'adopt', component: AdoptionFormComponent },
   { path: 'donate', component: DonateComponent },
   { path: 'contact', component: ContactComponent },
+  // --- NEW: Nested "Get Involved" Route ---
+  {
+    path: 'get-involved',
+    component: GetInvolvedComponent,
+    children: [
+      { path: 'adopt', component: AdoptionFormComponent },
+      { path: 'volunteer', component: VolunteerComponent },
+    ],
+  },
   { path: 'volunteer', component: VolunteerComponent },
   { path: 'our-story', component: OurStoryComponent },
   { path: 'donate/once', component: DonateOnceComponent },

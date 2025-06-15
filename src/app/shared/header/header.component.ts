@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav } from '@angular/material/sidenav';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../../auth.service';
+import { MatMenuModule } from '@angular/material/menu'; // <-- Import MatMenuModule
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ import { AuthService } from '../../auth.service';
     RouterModule,
     MatIconModule,
     NgIf,
+    MatMenuModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',

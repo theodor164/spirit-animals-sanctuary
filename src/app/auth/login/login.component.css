@@ -1,64 +1,84 @@
-form {
+/* Container to center everything on page */
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  background-color: #fdfaf6;
+  padding: 20px;
+}
+
+/* Form box */
+.login-form {
   background: white;
-  padding: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
   width: 100%;
   max-width: 400px;
   box-sizing: border-box;
-  margin: 0 auto;
 }
 
-h2 {
+/* Title */
+.login-form h2 {
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
   color: #333;
   font-weight: 600;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Labels */
 label {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #555;
+  color: #444;
   font-size: 14px;
 }
 
+/* Inputs */
 input[type="email"],
 input[type="password"] {
   width: 100%;
   padding: 12px 14px;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   border: 1.8px solid #ccc;
   border-radius: 6px;
-  font-size: 16px;
-  font-family: inherit;
+  font-size: 15px;
   transition: border-color 0.3s ease;
 }
 
-input[type="email"]:focus,
-input[type="password"]:focus {
+input:focus {
   border-color: #007bff;
   outline: none;
   box-shadow: 0 0 6px rgba(0, 123, 255, 0.4);
 }
 
-button[type="submit"], button {
+/* Error message */
+.error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+/* Buttons */
+button,
+.google-button {
   width: 100%;
-  padding: 14px 0;
-  background-color: #007bff;
-  color: white;
+  padding: 12px 0;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  margin-top: 10px;
   transition: background-color 0.25s ease;
 }
 
-button[type="button"] {
-  margin-top: 20px;
+button[type="submit"] {
+  background-color: #007bff;
+  color: white;
 }
 
 button[type="submit"]:hover:not(:disabled) {
@@ -68,4 +88,75 @@ button[type="submit"]:hover:not(:disabled) {
 button[type="submit"]:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+.secondary-btn {
+  background-color: #f3f3f3;
+  color: #333;
+}
+
+.secondary-btn:hover {
+  background-color: #e4e4e4;
+}
+
+/* Forgot password */
+.form-footer-link {
+  text-align: right;
+  margin-top: -12px;
+  margin-bottom: 12px;
+}
+
+.form-footer-link a {
+  font-size: 0.85rem;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.form-footer-link a:hover {
+  text-decoration: underline;
+}
+
+/* OR divider */
+.or-divider {
+  text-align: center;
+  margin: 25px 0;
+  position: relative;
+}
+
+.or-divider span {
+  background: white;
+  padding: 0 10px;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.or-divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  z-index: 0;
+}
+
+/* Google Sign-In Button */
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: 1.8px solid #ccc;
+  color: #444;
+  text-decoration: none;
+  gap: 10px;
+}
+
+.google-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.google-button:hover {
+  background-color: #f2f2f2;
 }

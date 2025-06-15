@@ -31,6 +31,10 @@
   font-weight: bold;
 }
 
+.logo {
+  margin-top: 50px;
+}
+
 @media (max-width: 800px) {
   .nav-links {
     display: none;

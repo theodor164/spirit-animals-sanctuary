@@ -14,9 +14,13 @@
   width: 1160px;
   display: flex;
   gap: 32px;
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+  }
 }
 
-.donate-container, .patreon-container {
+.donate-container,
+.patreon-container {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -27,7 +31,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.donate-link, .patreon-link {
+.donate-link,
+.patreon-link {
   text-decoration: none;
   color: black;
   font-weight: bold;

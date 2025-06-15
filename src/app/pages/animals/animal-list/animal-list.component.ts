@@ -9,45 +9,49 @@ import { RouterModule } from '@angular/router';
   styleUrl: './animal-list.component.css',
 })
 export class AnimalListComponent {
+  selectedAnimal: any = null;
+
   animals = [
     {
-      name: 'Caprita',
-      thumbnail:
-        'https://spiritanimals.ro/wp-content/uploads/2023/08/363427131_672053981634517_6459136923972407307_n-2.webp',
-      full: 'https://spiritanimals.ro/wp-content/uploads/2023/08/363427131_672053981634517_6459136923972407307_n-2.webp',
+      name: 'Luna',
+      image: 'https://placekitten.com/600/600',
+      description:
+        'Luna is a playful and curious kitten who loves sunshine and cuddles.',
     },
     {
-      name: 'Calut',
-      thumbnail:
-        'https://spiritanimals.ro/wp-content/uploads/2023/06/328737775_507508738241035_7029562333189319196_n.jpg',
-      full: 'https://spiritanimals.ro/wp-content/uploads/2023/06/328737775_507508738241035_7029562333189319196_n.jpg',
+      name: 'Charlie',
+      image: 'https://placedog.net/600/600?id=1',
+      description:
+        'Charlie is a gentle dog who enjoys long walks and belly rubs.',
     },
-    // Add more animals here
+    {
+      name: 'Bella',
+      image: 'https://placekitten.com/601/601',
+      description:
+        'Bella is an elegant cat who spends her days lounging and purring.',
+    },
+    {
+      name: 'Oscar',
+      image: 'https://placedog.net/601/601?id=2',
+      description: 'Oscar is a loyal and energetic companion with a big heart.',
+    },
+    {
+      name: 'Milo',
+      image: 'https://placebear.com/600/600',
+      description: 'Milo is a calm and curious bear who loves honey and naps.',
+    },
+    {
+      name: 'Nina',
+      image: 'https://loremflickr.com/600/600/animal',
+      description: 'Nina is a graceful animal full of charm and curiosity.',
+    },
   ];
 
-  currentIndex: number = 0;
-  lightboxOpen: boolean = false;
-
-  openLightbox(index: number) {
-    this.currentIndex = index;
-    this.lightboxOpen = true;
+  openModal(animal: any) {
+    this.selectedAnimal = animal;
   }
 
-  closeLightbox(event?: MouseEvent) {
-    if (
-      event &&
-      (event.target as HTMLElement).classList.contains('lightbox-content')
-    )
-      return;
-    this.lightboxOpen = false;
-  }
-
-  prevImage() {
-    this.currentIndex =
-      (this.currentIndex - 1 + this.animals.length) % this.animals.length;
-  }
-
-  nextImage() {
-    this.currentIndex = (this.currentIndex + 1) % this.animals.length;
+  closeModal() {
+    this.selectedAnimal = null;
   }
 }

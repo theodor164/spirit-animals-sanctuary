@@ -1,34 +1,49 @@
 <section class="page-container">
   <section class="adopt-hero">
-  <h1>Adopt a Friend</h1>
-  <p>
-    Give a rescued animal the loving home they deserve. By adopting, you’re giving them a second chance at life and becoming part of their healing journey.
-  </p>
-</section>
+    <h1>Adopt a Friend</h1>
+    <p>
+      Give a rescued animal the loving home they deserve. By adopting, you’re giving them a second chance at life and becoming part of their healing journey.
+    </p>
+  </section>
 
-<section class="adopt-info">
-  <h2>Why Adopt?</h2>
-  <p>
-    Every animal at our sanctuary has a story. Rescued from neglect or slaughter, these beautiful souls are now safe, but many are still waiting for their forever home.
-  </p>
-  <ul>
-    <li>Adoption changes lives — theirs and yours</li>
-    <li>We ensure ethical and responsible placements</li>
-    <li>You’ll always be part of our extended family</li>
-  </ul>
-</section>
+  <section class="adopt-quote">
+    <blockquote>
+      “Saving one animal won’t change the world, but it will change the world for that one animal.”
+    </blockquote>
+  </section>
 
-<section class="adopt-gallery">
-  <div class="animal-card" *ngFor="let animal of animals">
-    <img [ngSrc]="animal.image" [alt]="animal.name" width="400" height="300" />
-    <h3>{{ animal.name }}</h3>
-    <p>{{ animal.description }}</p>
+  <section class="adopt-info">
+    <h2>Why Adopt?</h2>
+    <p>
+      Every animal at our sanctuary has a story. Rescued from neglect or slaughter, these beautiful souls are now safe, but many are still waiting for their forever home.
+    </p>
+    <ul>
+      <li>Adoption changes lives — theirs and yours</li>
+      <li>We ensure ethical and responsible placements</li>
+      <li>You’ll always be part of our extended family</li>
+    </ul>
+  </section>
+
+  <section class="adopt-gallery">
+    <div class="animal-card" *ngFor="let animal of animals" (click)="selectAnimal(animal)">
+      <img [ngSrc]="animal.image" [alt]="animal.name" width="400" height="300" />
+      <h3>{{ animal.name }}</h3>
+      <p>{{ animal.description }}</p>
+      <button class="learn-more-btn">Learn More</button>
+    </div>
+  </section>
+
+  <section class="adopt-cta">
+    <h2>Ready to Adopt?</h2>
+    <a routerLink="/contact" class="adopt-button">Contact Us</a>
+  </section>
+
+  <div class="modal" *ngIf="selectedAnimal" (click)="selectedAnimal = null">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <span class="close" (click)="selectedAnimal = null">&times;</span>
+      <img [src]="selectedAnimal.image" [alt]="selectedAnimal.name" />
+      <h2>{{ selectedAnimal.name }}</h2>
+      <p>{{ selectedAnimal.description }}</p>
+    </div>
   </div>
-</section>
-
-<section class="adopt-cta">
-  <h2>Ready to Adopt?</h2>
-  <a href="/contact" class="adopt-button">Contact Us</a>
-</section>
-
 </section>

@@ -4,7 +4,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav } from '@angular/material/sidenav';
-import { NgIf } from '@angular/common';
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import { AuthService } from '../../auth.service';
 import { MatMenuModule } from '@angular/material/menu'; // <-- Import MatMenuModule
 
@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu'; // <-- Import MatMenuMod
     MatIconModule,
     NgIf,
     MatMenuModule,
+    NgOptimizedImage
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',

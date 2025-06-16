@@ -2,7 +2,7 @@ import { NgIf } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { AuthService } from '../../auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgxCaptchaModule, InvisibleReCaptchaComponent } from 'ngx-captcha'; // 1. Ensure this import is here
 // 2. Import the NgxCaptchaModule in your app.module.ts or app.config.ts
 //    and add it to the imports array if you're using a module-based approach
@@ -11,7 +11,7 @@ import { NgxCaptchaModule, InvisibleReCaptchaComponent } from 'ngx-captcha'; // 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, NgIf, NgxCaptchaModule],
+  imports: [FormsModule, NgIf, NgxCaptchaModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
@@ -25,6 +25,9 @@ export class RegisterComponent {
 
   // A temporary variable to hold our form data
   private formData: NgForm | null = null;
+
+  // NEW: Property for the checkbox
+  agreedToTerms: boolean = false;
 
   // Your reCAPTCHA v3 Site Key from the Google Console
   // Remember to replace 'YOUR_RECAPTCHA_V3_SITE_KEY' with your actual key
@@ -43,6 +46,13 @@ export class RegisterComponent {
     if (form.invalid || !this.passwordsMatch) {
       this.errorMessage =
         'Please ensure all fields are filled out correctly and passwords match.';
+      return;
+    }
+
+    // You can add an extra check here if you want
+    if (!this.agreedToTerms) {
+      this.errorMessage =
+        'You must agree to the Terms and Privacy Policy to register.';
       return;
     }
 

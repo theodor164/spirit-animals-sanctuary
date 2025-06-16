@@ -4,11 +4,12 @@ import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { NgxCaptchaModule, InvisibleReCaptchaComponent } from 'ngx-captcha';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-donate-once',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgFor, NgxCaptchaModule],
+  imports: [CommonModule, FormsModule, NgFor, NgxCaptchaModule, RouterLink],
   templateUrl: './donate-once.component.html',
   styleUrls: ['./donate-once.component.css'],
 })
@@ -24,6 +25,9 @@ export class DonateOnceComponent {
   message: string = '';
   stripePromise: Promise<Stripe | null>;
   recaptchaSiteKey = '6Ldr-2ErAAAAADW1yRNfbiY1Wu3LI_UYXRg2v2Q2'; // Replace with your key
+
+  // NEW: Property for the checkbox
+  agreedToTerms: boolean = false;
 
   constructor(private http: HttpClient) {
     this.stripePromise = loadStripe(
@@ -50,6 +54,11 @@ export class DonateOnceComponent {
     }
     if (!form.value.name || !form.value.email) {
       this.message = 'Please fill in your name and email address.';
+      return;
+    }
+    if (!this.agreedToTerms) {
+      this.message =
+        'You must agree to the Terms and Privacy Policy to donate.';
       return;
     }
 

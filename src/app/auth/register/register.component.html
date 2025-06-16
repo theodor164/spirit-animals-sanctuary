@@ -92,6 +92,28 @@
       </ngx-invisible-recaptcha>
     </div>
 
+    <!-- NEW: GDPR and Terms Agreement Checkbox -->
+    <div class="form-group terms-agreement">
+      <input
+        type="checkbox"
+        id="terms-register"
+        name="agreedToTerms"
+        [(ngModel)]="agreedToTerms"
+        required
+        #terms="ngModel"
+      />
+      <label for="terms-register">
+        Am citit și sunt de acord cu
+        <a routerLink="/terms-and-conditions" target="_blank"
+          >Termenii și Condițiile</a
+        >
+        și cu
+        <a routerLink="/privacy" target="_blank"
+          >Politica de Confidențialitate</a
+        >.
+      </label>
+    </div>
+
     <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
     <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
 

@@ -58,10 +58,35 @@
           </ngx-invisible-recaptcha>
         </div>
 
+        <!-- NEW: GDPR and Terms Agreement Checkbox -->
+        <div class="form-group terms-agreement">
+          <input
+            type="checkbox"
+            id="terms-donate"
+            name="agreedToTerms"
+            [(ngModel)]="agreedToTerms"
+            required
+          />
+          <label for="terms-donate">
+            Am citit și sunt de acord cu
+            <a routerLink="/termeni-si-conditii" target="_blank"
+              >Termenii și Condițiile</a
+            >
+            și cu
+            <a routerLink="/politica-de-confidentialitate" target="_blank"
+              >Politica de Confidențialitate</a
+            >.
+          </label>
+        </div>
+
         <div class="error" *ngIf="message">{{ message }}</div>
 
-        <!-- UPDATED: Changed to a (click) event -->
-        <button type="button" (click)="handleDonationClick(donateForm)">
+        <!-- UPDATED: Button is disabled until terms are accepted -->
+        <button
+          type="button"
+          (click)="handleDonationClick(donateForm)"
+          [disabled]="donateForm.invalid || !agreedToTerms"
+        >
           Donate Now
         </button>
       </form>

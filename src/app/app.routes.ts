@@ -18,6 +18,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { AuthGuard } from './auth/auth.guard';
 import { GetInvolvedComponent } from './pages/get-involved/get-involved.component';
+import { TermsAndConditionsComponent } from './pages/terms-and-conditions/terms-and-conditions.component';
+import { PrivacyComponent } from './pages/privacy/privacy.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,6 +46,8 @@ export const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'auth/callback', component: AuthCallbackComponent },
+  { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+  { path: 'privacy', component: PrivacyComponent },
   {
     path: 'dashboard',
     component: DashboardComponent,

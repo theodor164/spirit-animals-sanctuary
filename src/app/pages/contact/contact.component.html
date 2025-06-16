@@ -15,7 +15,8 @@
       <p><strong>Location:</strong> Bucovina, Romania</p>
     </div>
     <div class="contact-form">
-      <form (submit)="onSubmit()">
+      <!-- REMOVED (submit) from form tag -->
+      <form #contactForm="ngForm">
         <label>
           Name:
           <input type="text" [(ngModel)]="form.name" name="name" required />
@@ -35,7 +36,34 @@
           ></textarea>
         </label>
 
-        <button type="submit">Send Message</button>
+        <!-- NEW: reCAPTCHA Component -->
+        <div class="form-group captcha-container">
+          <ngx-invisible-recaptcha
+            #captchaElem
+            [siteKey]="recaptchaSiteKey"
+            (success)="handleRecaptchaSuccess($event)"
+          >
+          </ngx-invisible-recaptcha>
+        </div>
+
+        <div
+          *ngIf="message"
+          class="message-box"
+          [class.success]="!isError"
+          [class.error]="isError"
+        >
+          {{ message }}
+        </div>
+
+        <!-- UPDATED: Changed to a (click) event -->
+        <button
+          type="button"
+          (click)="handleSendMessageClick(contactForm)"
+          [disabled]="isLoading"
+        >
+          <span *ngIf="!isLoading">Send Message</span>
+          <span *ngIf="isLoading">Sending...</span>
+        </button>
       </form>
     </div>
   </section>

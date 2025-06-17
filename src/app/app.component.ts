@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
 import { AuthService } from './auth.service';
+import { TestModeBannerComponent } from './components/test-mode-banner/test-mode-banner.component';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ import { AuthService } from './auth.service';
     RouterLink,
     RouterModule,
     NgIf,
+    TestModeBannerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -34,7 +36,10 @@ import { AuthService } from './auth.service';
 export class AppComponent implements AfterViewInit {
   @ViewChild('drawer') drawer!: MatSidenav;
 
-  constructor(private breakpointObserver: BreakpointObserver, private authService: AuthService) {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthService
+  ) {}
 
   ngAfterViewInit(): void {
     this.breakpointObserver
@@ -45,7 +50,7 @@ export class AppComponent implements AfterViewInit {
         }
       });
   }
-  
+
   logout(): void {
     this.authService.logout();
   }

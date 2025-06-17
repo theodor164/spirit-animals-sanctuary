@@ -48,7 +48,10 @@ export class ContactComponent {
     };
 
     this.http
-      .post<{ message: string }>('http://localhost:3000/api/contact', payload)
+      .post<{ message: string }>(
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/contact',
+        payload
+      )
       .subscribe({
         next: (response) => {
           this.isLoading = false;

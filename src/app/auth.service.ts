@@ -31,7 +31,8 @@ interface AuthResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:3000/api/auth'; // Adjust the base URL as needed
+  private baseUrl =
+    'https://spirit-animals-sanctuary-backend.onrender.com/api/auth'; // Adjust the base URL as needed
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -36,7 +36,7 @@ export class VerifyEmailComponent implements OnInit {
     // 2. Send the token to the backend API
     this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/auth/verify-email',
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/auth/verify-email',
         { token }
       )
       .subscribe({

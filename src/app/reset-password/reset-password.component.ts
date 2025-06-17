@@ -69,7 +69,7 @@ export class ResetPasswordComponent implements OnInit {
 
     this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/auth/reset-password',
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/auth/reset-password',
         { token: this.token, password }
       )
       .subscribe({

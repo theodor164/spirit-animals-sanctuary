@@ -50,7 +50,7 @@ export class ForgotPasswordComponent {
 
     this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/auth/forgot-password',
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/auth/forgot-password',
         payload
       )
       .subscribe({

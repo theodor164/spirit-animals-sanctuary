@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
 
     this.http
       .post<{ message: string }>(
-        'http://localhost:3000/api/user/change-password',
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/user/change-password',
         {
           currentPassword: this.changePasswordData.currentPassword,
           newPassword: this.changePasswordData.newPassword,
@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
   redirectToCustomerPortal() {
     this.http
       .post<{ url: string }>(
-        'http://localhost:3000/api/create-customer-portal-session',
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/create-customer-portal-session',
         {}
       )
       .subscribe({
@@ -123,7 +123,7 @@ export class DashboardComponent implements OnInit {
     }
     this.http
       .post<{ id: string }>(
-        'http://localhost:3000/api/create-subscription-session',
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/create-subscription-session',
         { amount: this.subscriptionAmount }
       )
       .subscribe({
@@ -153,7 +153,7 @@ export class DashboardComponent implements OnInit {
 
     this.http
       .post<{ id: string }>(
-        'http://localhost:3000/api/create-checkout-session',
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/create-checkout-session',
         {
           amount: this.donationAmount,
         }
@@ -177,7 +177,10 @@ export class DashboardComponent implements OnInit {
   acceptTerms() {
     // Apelăm noua rută de pe backend
     this.http
-      .post('http://localhost:3000/api/user/accept-terms', {})
+      .post(
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/user/accept-terms',
+        {}
+      )
       .subscribe({
         next: () => {
           // Doar după ce backend-ul confirmă succesul, închidem fereastra
@@ -201,7 +204,9 @@ export class DashboardComponent implements OnInit {
         message: string;
         user: User & { stripe_customer_id?: string };
         donations: Donation[];
-      }>('http://localhost:3000/api/user/dashboard')
+      }>(
+        'https://spirit-animals-sanctuary-backend.onrender.com/api/user/dashboard'
+      )
       .subscribe({
         next: (response) => {
           this.message = response.message;

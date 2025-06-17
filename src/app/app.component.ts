@@ -13,6 +13,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { NgIf } from '@angular/common';
 import { AuthService } from './auth.service';
 import { TestModeBannerComponent } from './components/test-mode-banner/test-mode-banner.component';
+import { CookieConsentBannerComponent } from './components/cookie-consent-banner/cookie-consent-banner.component';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ import { TestModeBannerComponent } from './components/test-mode-banner/test-mode
     RouterModule,
     NgIf,
     TestModeBannerComponent,
+    CookieConsentBannerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

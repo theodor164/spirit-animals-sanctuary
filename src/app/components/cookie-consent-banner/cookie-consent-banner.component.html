@@ -1,0 +1,11 @@
+
+<!-- Banner-ul este afișat doar dacă utilizatorul nu a acceptat deja -->
+<div *ngIf="showBanner" class="banner-wrapper">
+  <div class="banner-content">
+    <p class="banner-text">
+      Folosim cookies și tehnologii similare esențiale pentru a asigura funcționarea corectă și securitatea site-ului. Prin continuarea navigării, sunteți de acord cu utilizarea acestora. Aflați mai multe în 
+      <a routerLink="/privacy" class="privacy-link">Politica de Confidențialitate</a>.
+    </p>
+    <button (click)="acceptCookies()" class="accept-button">Am înțeles</button>
+  </div>
+</div>

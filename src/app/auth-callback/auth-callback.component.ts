@@ -16,20 +16,24 @@ export class AuthCallbackComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    // 1. Get the token from the URL query parameters
     const token = this.route.snapshot.queryParamMap.get('token');
+    const isFirstLogin =
+      this.route.snapshot.queryParamMap.get('firstGoogleLogin');
 
     if (token) {
-      // 2. Save the token to local storage
       localStorage.setItem('token', token);
 
-      // 3. Redirect to the dashboard
-      this.router.navigate(['/dashboard']);
+      // Redirectăm la dashboard, adăugând un parametru dacă e prima logare
+      if (isFirstLogin) {
+        this.router.navigate(['/dashboard'], {
+          queryParams: { showTerms: 'true' },
+        });
+      } else {
+        this.router.navigate(['/dashboard']);
+      }
     } else {
-      // Handle the case where the token is missing
       this.isError = true;
       this.message = 'Authentication failed. Please try again.';
-      // Optionally redirect back to login after a delay
       setTimeout(() => {
         this.router.navigate(['/login']);
       }, 5000);

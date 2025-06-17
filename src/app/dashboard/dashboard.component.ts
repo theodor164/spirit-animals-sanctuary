@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common'; // Combined imports
 import { FormsModule } from '@angular/forms';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { ActivatedRoute, RouterLink } from '@angular/router'; // Import ActivatedRoute
 
 // --- These interfaces are no longer needed here ---
 // interface StripeSubscription { ... }
@@ -14,6 +15,7 @@ interface User {
   name: string;
   email: string;
   hasLocalPassword?: boolean; // This property is now expected
+  requiresTermsAcceptance?: boolean; // Noul flag de la backend
 }
 
 interface Donation {
@@ -25,7 +27,7 @@ interface Donation {
 @Component({
   selector: 'app-dashboard',
   // standalone: true // If you use standalone components, keep this
-  imports: [NgIf, NgFor, CommonModule, FormsModule],
+  imports: [NgIf, NgFor, CommonModule, FormsModule, RouterLink],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -47,7 +49,10 @@ export class DashboardComponent implements OnInit {
     confirmNewPassword: '',
   };
 
-  constructor(private http: HttpClient) {
+  // NOU: Proprietate pentru a controla vizibilitatea modal-ului
+  showTermsModal: boolean = false;
+
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
     this.stripePromise = loadStripe(
       'pk_test_51OHSZJJtqR3ifyMoetq4CdyKvrTWgozhmSdkf26pNrcjAqi5tNYmlSBmz8DRit8MHkuqBjPMpa5ouL9vawlgCv1r00RytXbZ9S'
     );
@@ -168,12 +173,33 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  // --- Metoda acceptTerms actualizată ---
+  acceptTerms() {
+    // Apelăm noua rută de pe backend
+    this.http
+      .post('http://localhost:3000/api/user/accept-terms', {})
+      .subscribe({
+        next: () => {
+          // Doar după ce backend-ul confirmă succesul, închidem fereastra
+          this.showTermsModal = false;
+          // Reîmprospătăm starea utilizatorului pentru a ascunde permanent fereastra
+          if (this.user) {
+            this.user.requiresTermsAcceptance = false;
+          }
+        },
+        error: (err) => {
+          // Afișăm o eroare dacă ceva nu a funcționat
+          console.error('Failed to accept terms', err);
+          this.message = 'A apărut o eroare. Vă rugăm să reîncercați.';
+        },
+      });
+  }
+
   ngOnInit() {
-    // FIX: Update the expected user object type
     this.http
       .get<{
         message: string;
-        user: User & { stripe_customer_id?: string }; // User will now have hasLocalPassword
+        user: User & { stripe_customer_id?: string };
         donations: Donation[];
       }>('http://localhost:3000/api/user/dashboard')
       .subscribe({
@@ -181,6 +207,17 @@ export class DashboardComponent implements OnInit {
           this.message = response.message;
           this.user = response.user;
           this.donations = response.donations;
+
+          // --- FIX: Logica a fost separată pentru claritate și corectitudine ---
+
+          // Pasul 1: Verificăm dacă utilizatorul trebuie să accepte termenii.
+          // Această verificare se face pentru TOȚI utilizatorii, indiferent dacă au abonamente sau nu.
+          if (this.user && this.user.requiresTermsAcceptance) {
+            this.showTermsModal = true;
+          }
+
+          // Pasul 2: Verificăm dacă utilizatorul are un ID de client Stripe
+          // pentru a afișa butonul "Manage Billing".
           if (response.user && response.user.stripe_customer_id) {
             this.hasSubscriptions = true;
           }

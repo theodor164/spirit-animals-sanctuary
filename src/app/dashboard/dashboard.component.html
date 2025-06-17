@@ -1,4 +1,31 @@
-<section class="page-container">
+<!-- Modal pentru consimțământ GDPR/Termeni -->
+<div *ngIf="showTermsModal" class="modal-overlay">
+  <div class="modal-content">
+    <h3>Bun venit la Spirit Animals Sanctuary!</h3>
+    <p>
+      Pentru a continua, vă rugăm să confirmați că sunteți de acord cu
+      documentele noastre legale.
+    </p>
+    <div class="terms-text">
+      <p>
+        Prin crearea acestui cont, confirmați că ați citit și sunteți de acord
+        cu
+        <a routerLink="/terms-and-conditions" target="_blank"
+          >Termenii și Condițiile</a
+        >
+        noastre și cu
+        <a routerLink="/privacy" target="_blank"
+          >Politica de Confidențialitate</a
+        >.
+      </p>
+    </div>
+    <button (click)="acceptTerms()" class="accept-button">
+      Sunt de acord și continui
+    </button>
+  </div>
+</div>
+
+<section class="page-container" [class.blurred]="showTermsModal">
   <h2>Welcome to your Dashboard!</h2>
   <p *ngIf="message">{{ message }}</p>
 

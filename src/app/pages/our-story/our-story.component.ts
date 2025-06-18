@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-our-story',
-  imports: [NgOptimizedImage, RouterModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './our-story.component.html',
-  styleUrl: './our-story.component.css',
+  styleUrls: ['./our-story.component.css'],
 })
-export class OurStoryComponent {}
+export class OurStoryComponent {
+  // Nu este necesară nicio logică specifică pentru această componentă statică
+}

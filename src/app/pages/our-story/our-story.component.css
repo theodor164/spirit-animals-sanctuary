@@ -1,76 +1,235 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+/* Importul fonturilor necesare */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400&display=swap");
 
-.our-story {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f7f3ee;
-  color: #222;
-  padding: 30px 20px;
-  max-width: 1080px;
-  margin: auto;
-  line-height: 1.8;
+/* Stiluri generale pentru pagina */
+.story-page {
+  background-color: #f8f7f2; /* O nuanță de alb cald, primitor */
 }
 
-.page-title {
-  font-size: 3rem;
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.hero-image {
+/* Secțiunea Erou */
+.hero-section {
+  position: relative;
   width: 100%;
-  border-radius: 8px;
-  margin-bottom: 30px;
-}
-
-.intro-text p {
-  font-size: 1.1rem;
-  margin-bottom: 16px;
-}
-
-.team-heading {
+  height: 60vh; /* O înălțime generoasă, dar nu copleșitoare */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  font-size: 2rem;
-  margin: 50px 0 20px;
+  color: white;
+  background-image: url("/assets/images/hero-our-story.jpg"); /* Imagine de fundal pentru secțiunea erou */
+  background-size: cover;
+  background-position: center 70%; /* Centrează imaginea puțin mai jos pentru a focaliza pe peisaj/animale */
+  background-attachment: fixed; /* Efect de paralaxă la scroll */
+  margin-top: -64px;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.25
+  ); /* Strat semi-transparent pentru lizibilitate */
+}
+
+.hero-text {
+  position: relative; /* Asigură că textul este deasupra stratului */
+  z-index: 10;
+  animation: fadeInDown 1s ease-out;
+}
+
+.hero-text h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-text p {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* Secțiunea de Conținut */
+.content-section {
+  padding: 4rem 1.5rem;
+  background-color: #ffffff;
+  border-top: 5px solid #4a5568; /* O bordură de accent */
+  box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.1);
+  position: relative; /* Pentru a asigura suprapunerea corectă */
+}
+
+.story-article {
+  max-width: 1160px;
+  margin: 0 auto;
+  color: #2d3748; /* Un gri închis, moale, pentru text */
+  font-size: 1.15rem; /* Mărime confortabilă pentru lectură */
+  line-height: 1.8; /* Spațiere generoasă între rânduri */
+  font-weight: 400;
+  animation: fadeInUp 1s ease-out;
+}
+
+.story-article p {
+  margin-bottom: 1.5rem;
+}
+
+.story-article strong {
+  font-weight: 700;
+  color: #1a202c; /* Un negru mai puternic pentru accent */
+}
+
+/* --- STILURI NOI PENTRU SECȚIUNEA ECHIPEI --- */
+
+.team-section {
+  padding: 4rem 1.5rem 6rem 1.5rem;
+  background-color: #f8f7f2; /* Continuă culoarea de fundal a paginii */
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.team-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.team-header p {
+  margin-top: 0.5rem;
+  font-size: 1.125rem;
+  color: #4a5568;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .team-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: repeat(1, 1fr); /* O coloană pe mobil */
+  gap: 2.5rem;
+  max-width: 1160px;
+  margin: 0 auto;
 }
 
-.team-member {
-  text-align: center;
+.team-card {
+  background-color: #ffffff;
+  border-radius: 0.75rem; /* 12px */
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
-.team-member img {
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.card-image-container {
   width: 100%;
-  max-width: 300px;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  /* Respectă raportul de aspect cerut: 720.156 / 561.453 ~= 1.282 */
+  aspect-ratio: 561 / 405;
+  overflow: hidden;
 }
 
-.team-member h4 {
-  font-size: 1.3rem;
-  margin: 10px 0;
+.card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.team-member p {
-  font-size: 1rem;
-  padding: 0 10px;
+.team-card:hover .card-image-container img {
+  transform: scale(1.05);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+.card-content {
+  padding: 1.5rem;
+  flex-grow: 1; /* Asigură că textul umple spațiul rămas */
+}
+
+section.team-section > div.team-grid > div:nth-child(1) > div.card-content {
+  background-color: #774898;
+}
+
+section.team-section > div.team-grid > div:nth-child(2) > div.card-content {
+  background-color: #f3ae4b;
+}
+
+section.team-section > div.team-grid > div:nth-child(3) > div.card-content {
+  background-color: #00a8b5;
+}
+
+section.team-section > div.team-grid > div:nth-child(4) > div.card-content {
+  background-color: #de4383;
+}
+
+h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+
+.card-content .image-caption {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: white;
+}
+
+/* Animații de apariție */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stiluri pentru ecrane mici */
+@media (min-width: 768px) {
+  .hero-text h1 {
+    font-size: 4.5rem;
+  }
+  .content-section {
+    padding: 6rem 2rem;
+  }
+}
+
+/* Stiluri pentru ecrane mai mari */
+@media (min-width: 768px) {
   .team-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
-
-  .page-title {
-    font-size: 2.2rem;
-  }
-
-  .team-heading {
-    font-size: 1.6rem;
-  }
+}
+@media (min-width: 1024px) {
+  /* Stiluri specifice pentru desktop-uri mai mari, dacă e necesar */
 }

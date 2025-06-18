@@ -18,22 +18,22 @@
         routerLink="/"
         routerLinkActive="active-link"
         [routerLinkActiveOptions]="{ exact: true }"
-        >Home</a
+        >Acasa</a
       >
       <a mat-button routerLink="/our-story" routerLinkActive="active-link"
-        >Our Story</a
+        >Povestea</a
       >
       <a mat-button routerLink="/animals" routerLinkActive="active-link"
-        >Our Animals</a
+        >Rezidenții</a
       >
 
       <!-- NEW: "Get Involved" Dropdown Menu -->
       <button mat-button [matMenuTriggerFor]="getInvolvedMenu">
-        Get Involved
+        Implica-te
       </button>
       <mat-menu #getInvolvedMenu="matMenu">
-        <a mat-menu-item routerLink="/get-involved/adopt">Adopt</a>
-        <a mat-menu-item routerLink="/get-involved/volunteer">Volunteer</a>
+        <a mat-menu-item routerLink="/get-involved/adopt">Adopta</a>
+        <a mat-menu-item routerLink="/get-involved/volunteer">Voluntariat</a>
       </mat-menu>
 
       <a mat-button routerLink="/contact" routerLinkActive="active-link"
@@ -43,12 +43,12 @@
       <!-- User Authentication Links -->
       <ng-container *ngIf="isLoggedIn(); else loggedOut">
         <a mat-button routerLink="/dashboard" routerLinkActive="active-link"
-          >Dashboard</a
+          >Contul Tau</a
         >
-        <a mat-button (click)="logout()">Logout</a>
+        <a mat-button (click)="logout()">Deconectare</a>
       </ng-container>
       <ng-template #loggedOut>
-        <a mat-button routerLink="/login">Login</a>
+        <a mat-button routerLink="/login">Conectare</a>
       </ng-template>
     </nav>
 
@@ -58,7 +58,7 @@
       color="accent"
       routerLink="/donate"
       class="donate-button"
-      >Donate</a
+      >Doneaza</a
     >
 
     <!-- Mobile Menu Button -->

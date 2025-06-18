@@ -1,35 +1,61 @@
-<section class="page-container">
-  <!-- our-animals.component.html -->
-  <main class="animal-gallery">
-    <h1 class="gallery-title">Meet Our Animals</h1>
-    <section class="grid">
-      <div
-        class="card"
-        *ngFor="let animal of animals"
-        (click)="openModal(animal)"
-      >
-        <img
-          [ngSrc]="animal.image"
-          width="600"
-          height="600"
-          [alt]="animal.name"
-        />
+<div class="page-container">
+  <!-- Antetul Secțiunii -->
+  <header class="page-header">
+    <h1>Faceți cunoștință cu Rezidenții Noștri</h1>
+    <p>
+      Fiecare suflet de aici are o poveste unică și așteaptă cu speranță un
+      ajutor de la oamenii iubitori. Descoperă-i și lasă-te cucerit.
+    </p>
+  </header>
+
+  <!-- Grila de Poze -->
+  <div class="gallery-grid">
+    <!-- Iterăm prin lista de animale afișate -->
+    <div
+      *ngFor="let animal of displayedAnimals; let i = index"
+      class="gallery-card"
+      [style.animation-delay.ms]="100 * (i + 1)"
+    >
+      <img
+        [src]="animal.imageUrl"
+        [alt]="'Poza cu ' + animal.name"
+        class="animal-image"
+      />
+      <div class="card-overlay">
         <div class="card-text">
-          <h2>{{ animal.name }}</h2>
-          <a href="#" class="learn-more" (click)="$event.preventDefault()"
-            >Learn More</a
-          >
+          <h3>{{ animal.name }}</h3>
+          <p>{{ animal.status }}</p>
         </div>
       </div>
-    </section>
-
-    <div class="modal" *ngIf="selectedAnimal" (click)="closeModal()">
-      <div class="modal-content" (click)="$event.stopPropagation()">
-        <span class="close" (click)="closeModal()">&times;</span>
-        <img [src]="selectedAnimal.image" [alt]="selectedAnimal.name" />
-        <h2>{{ selectedAnimal.name }}</h2>
-        <p>{{ selectedAnimal.description }}</p>
-      </div>
     </div>
-  </main>
-</section>
+  </div>
+
+  <!-- Paginare -->
+  <nav class="pagination-container" *ngIf="totalPages > 1">
+    <!-- Butonul 'Previous' -->
+    <button
+      (click)="goToPage(currentPage - 1)"
+      [disabled]="currentPage === 1"
+      class="pagination-arrow"
+    >
+      &laquo;
+    </button>
+    <!-- Butoanele pentru numărul paginilor -->
+    <button
+      *ngFor="let page of pages"
+      (click)="goToPage(page)"
+      [class.active]="currentPage === page"
+      class="pagination-button"
+    >
+      {{ page }}
+    </button>
+    <!-- Butonul 'Next' -->
+    <button
+      (click)="goToPage(currentPage + 1)"
+      [disabled]="currentPage === totalPages"
+      class="pagination-arrow"
+    >
+      &raquo;
+    </button>
+  </nav>
+</div>

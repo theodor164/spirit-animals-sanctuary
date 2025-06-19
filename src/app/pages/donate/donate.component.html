@@ -44,9 +44,11 @@
           class="donate-button primary"
           >Donează Acum</a
         >
+        <!-- MODIFICAT: Trimite utilizatorul logat direct la tab-ul de donații -->
         <a
           *ngIf="isLoggedIn()"
-          routerLink="/dashboard"
+          [routerLink]="['/dashboard']"
+          [queryParams]="{ tab: 'makeDonation' }"
           class="donate-button primary"
           >Donează Acum</a
         >
@@ -81,9 +83,11 @@
           class="donate-button secondary"
           >Devino Sponsor Lunar</a
         >
+        <!-- MODIFICAT: Trimite utilizatorul logat direct la tab-ul de donații -->
         <a
           *ngIf="isLoggedIn()"
-          routerLink="/dashboard"
+          [routerLink]="['/dashboard']"
+          [queryParams]="{ tab: 'makeDonation' }"
           class="donate-button secondary"
           >Devino Sponsor Lunar</a
         >

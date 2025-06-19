@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common'; // Combined imports
 import { FormsModule } from '@angular/forms';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
-import { ActivatedRoute, RouterLink } from '@angular/router'; // Import ActivatedRoute
+import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 
 // --- These interfaces are no longer needed here ---
 // interface StripeSubscription { ... }
@@ -27,7 +27,7 @@ interface Donation {
 @Component({
   selector: 'app-dashboard',
   // standalone: true // If you use standalone components, keep this
-  imports: [NgIf, NgFor, CommonModule, FormsModule, RouterLink],
+  imports: [NgIf, NgFor, CommonModule, FormsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
@@ -49,6 +49,9 @@ export class DashboardComponent implements OnInit {
     confirmNewPassword: '',
   };
 
+  // NOU: Proprietate pentru a gestiona tab-ul activ
+  activeTab: 'donations' | 'settings' | 'makeDonation' = 'donations';
+
   // NOU: Proprietate pentru a controla vizibilitatea modal-ului
   showTermsModal: boolean = false;
 
@@ -58,6 +61,12 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  // NOU: Funcție pentru a schimba tab-ul activ
+  setActiveTab(tab: 'donations' | 'settings' | 'makeDonation') {
+    this.activeTab = tab;
+    this.message = ''; // Resetează mesajele la schimbarea tab-ului
+  }
+
   // --- NEW: Method to handle password change ---
   changePassword() {
     this.message = ''; // Clear previous messages
@@ -65,11 +74,11 @@ export class DashboardComponent implements OnInit {
       this.changePasswordData.newPassword !==
       this.changePasswordData.confirmNewPassword
     ) {
-      this.message = 'New passwords do not match.';
+      this.message = 'Parolele noi nu se potrivesc.';
       return;
     }
     if (this.changePasswordData.newPassword.length < 6) {
-      this.message = 'New password must be at least 6 characters long.';
+      this.message = 'Noua parolă trebuie să aibă cel puțin 6 caractere.';
       return;
     }
 
@@ -93,7 +102,7 @@ export class DashboardComponent implements OnInit {
         },
         error: (err) => {
           this.message =
-            err.error?.errors?.[0]?.msg || 'Failed to change password.';
+            err.error?.errors?.[0]?.msg || 'Nu am putut schimba parola.';
         },
       });
   }
@@ -109,16 +118,15 @@ export class DashboardComponent implements OnInit {
           window.location.href = session.url;
         },
         error: (err) => {
-          this.message =
-            'Could not open the billing portal. Please try again later.';
+          this.message = 'Nu am putut deschide portalul de plăți.';
           console.error('Portal session error:', err);
         },
       });
   }
 
   startSubscription() {
-    if (!this.subscriptionAmount || this.subscriptionAmount < 5) {
-      this.message = 'Monthly donation must be at least 5 RON.';
+    if (!this.subscriptionAmount || this.subscriptionAmount < 10) {
+      this.message = 'Donația lunară trebuie să fie de cel puțin 10 LEI.';
       return;
     }
     this.http
@@ -147,7 +155,7 @@ export class DashboardComponent implements OnInit {
 
   submitDonation() {
     if (this.donationAmount <= 0) {
-      this.message = 'Please enter a valid amount.';
+      this.message = 'Vă rugăm introduceți o sumă validă.';
       return;
     }
 
@@ -168,7 +176,7 @@ export class DashboardComponent implements OnInit {
           }
         },
         error: (error) => {
-          this.message = 'Failed to create checkout session: ' + error.message;
+          this.message = 'Crearea sesiunii de plată a eșuat.' + error.message;
         },
       });
   }
@@ -199,6 +207,12 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    // --- MODIFICARE: Verificăm parametrul din URL înainte de orice altceva ---
+    const tabFromUrl = this.route.snapshot.queryParamMap.get('tab');
+    if (tabFromUrl === 'makeDonation') {
+      this.activeTab = 'makeDonation';
+    }
+
     this.http
       .get<{
         message: string;

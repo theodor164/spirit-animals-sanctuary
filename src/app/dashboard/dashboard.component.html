@@ -1,151 +1,159 @@
-<!-- Modal pentru consimțământ GDPR/Termeni -->
+<!-- Modalul pentru consimțământ rămâne la început -->
 <div *ngIf="showTermsModal" class="modal-overlay">
-  <div class="modal-content">
-    <h3>Bun venit la Spirit Animals Sanctuary!</h3>
-    <p>
-      Pentru a continua, vă rugăm să confirmați că sunteți de acord cu
-      documentele noastre legale.
-    </p>
-    <div class="terms-text">
-      <p>
-        Prin crearea acestui cont, confirmați că ați citit și sunteți de acord
-        cu
-        <a routerLink="/terms-and-conditions" target="_blank"
-          >Termenii și Condițiile</a
-        >
-        noastre și cu
-        <a routerLink="/privacy" target="_blank"
-          >Politica de Confidențialitate</a
-        >.
-      </p>
-    </div>
-    <button (click)="acceptTerms()" class="accept-button">
-      Sunt de acord și continui
-    </button>
-  </div>
+  <!-- ... conținutul modalului ... -->
 </div>
 
-<section class="page-container" [class.blurred]="showTermsModal">
-  <h2>Welcome to your Dashboard!</h2>
-  <p *ngIf="message">{{ message }}</p>
+<div class="dashboard-wrapper" [class.blurred]="showTermsModal">
+  <div class="dashboard-container" *ngIf="user">
+    <!-- Coloana din Stânga: Navigare și Profil -->
+    <aside class="sidebar">
+      <div class="profile-header">
+        <div class="profile-avatar">{{ user.name.charAt(0) }}</div>
+        <h2 class="profile-name">{{ user.name }}</h2>
+        <p class="profile-email">{{ user.email }}</p>
+      </div>
+      <nav class="sidebar-nav">
+        <button
+          (click)="setActiveTab('donations')"
+          [class.active]="activeTab === 'donations'"
+        >
+          Istoric Donații
+        </button>
+        <button
+          (click)="setActiveTab('makeDonation')"
+          [class.active]="activeTab === 'makeDonation'"
+        >
+          Donează Acum
+        </button>
+        <button
+          (click)="setActiveTab('settings')"
+          [class.active]="activeTab === 'settings'"
+        >
+          Setări Cont
+        </button>
+      </nav>
+    </aside>
 
-  <div class="user-info" *ngIf="user">
-    <h3>Your Info</h3>
-    <ul>
-      <li><strong>Name:</strong> {{ user.name }}</li>
-      <li><strong>Email:</strong> {{ user.email }}</li>
-    </ul>
+    <!-- Coloana din Dreapta: Conținutul Tab-ului Activ -->
+    <main class="main-content">
+      <!-- Mesaje de Feedback Generale -->
+      <div *ngIf="message" class="message-box">{{ message }}</div>
 
-    <!-- NEW: Conditionally show the Change Password form -->
-    <div *ngIf="user.hasLocalPassword">
-      <hr />
-      <h3>Change Your Password</h3>
-      <form
-        (ngSubmit)="changePassword()"
-        #changePasswordForm="ngForm"
-        class="donation-form"
-      >
-        <div class="form-group">
-          <label for="currentPassword">Current Password</label>
-          <input
-            type="password"
-            id="currentPassword"
-            name="currentPassword"
-            required
-            [(ngModel)]="changePasswordData.currentPassword"
-          />
+      <!-- Tab-ul: Istoric Donații -->
+      <div *ngIf="activeTab === 'donations'" class="content-panel">
+        <h3>Istoricul Donațiilor Tale</h3>
+        <p>
+          Aici poți vedea toate actele tale de bunătate. Îți mulțumim din suflet
+          pentru sprijin!
+        </p>
+        <div
+          class="donations-list"
+          *ngIf="donations.length > 0; else noDonations"
+        >
+          <table>
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Suma</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let donation of donations">
+                <td>{{ donation.date | date : "mediumDate" }}</td>
+                <td>{{ donation.amount }} LEI</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="form-group">
-          <label for="newPassword">New Password</label>
-          <input
-            type="password"
-            id="newPassword"
-            name="newPassword"
-            required
-            [(ngModel)]="changePasswordData.newPassword"
-          />
+        <ng-template #noDonations>
+          <div class="empty-state">Nu ai făcut nicio donație încă. 💖</div>
+        </ng-template>
+      </div>
+
+      <!-- Tab-ul: Donează Acum -->
+      <div *ngIf="activeTab === 'makeDonation'" class="content-panel">
+        <h3>Fă o Donație</h3>
+        <p>
+          Contribuția ta ne ajută să continuăm misiunea. Alege metoda preferată
+          de a ajuta.
+        </p>
+        <div class="donation-forms-container">
+          <!-- Formular Donație Unică -->
+          <form (ngSubmit)="submitDonation()" class="donation-form">
+            <h4>Donație Unică</h4>
+            <label for="amount">Sumă (LEI)</label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              required
+              [(ngModel)]="donationAmount"
+              min="5"
+            />
+            <button type="submit">Donează o singură dată</button>
+          </form>
+          <!-- Formular Donație Lunară -->
+          <form (ngSubmit)="startSubscription()" class="donation-form">
+            <h4>Donație Lunară</h4>
+            <label for="subscriptionAmount">Sumă (LEI)</label>
+            <input
+              type="number"
+              id="subscriptionAmount"
+              name="subscriptionAmount"
+              required
+              [(ngModel)]="subscriptionAmount"
+              min="5"
+            />
+            <button type="submit">Devino Sponsor Lunar</button>
+          </form>
         </div>
-        <div class="form-group">
-          <label for="confirmNewPassword">Confirm New Password</label>
-          <input
-            type="password"
-            id="confirmNewPassword"
-            name="confirmNewPassword"
-            required
-            [(ngModel)]="changePasswordData.confirmNewPassword"
-          />
+      </div>
+
+      <!-- Tab-ul: Setări Cont -->
+      <div *ngIf="activeTab === 'settings'" class="content-panel">
+        <h3>Setările Contului Tău</h3>
+
+        <!-- Secțiune Gestionare Abonamente -->
+        <div class="setting-section" *ngIf="hasSubscriptions">
+          <h4>Abonamentele Mele</h4>
+          <p>
+            Gestionează-ți donațiile lunare și metodele de plată într-un portal
+            securizat.
+          </p>
+          <button (click)="redirectToCustomerPortal()" class="portal-button">
+            Mergi la Portalul de Plăți
+          </button>
         </div>
-        <button type="submit">Update Password</button>
-      </form>
-    </div>
 
-    <hr />
-
-    <h3>Your Subscriptions</h3>
-
-    <!-- Show a "Manage Billing" button if the user might have subscriptions -->
-    <div *ngIf="hasSubscriptions">
-      <p>Click below to manage your payment methods and recurring donations.</p>
-      <button
-        (click)="redirectToCustomerPortal()"
-        class="manage-billing-button"
-      >
-        Manage Billing & Subscriptions
-      </button>
-    </div>
-
-    <div *ngIf="!hasSubscriptions">
-      <p>You have no active subscriptions.</p>
-    </div>
-
-    <!-- DELETED the *ngFor block that listed subscriptions -->
-
-    <h3>Your Donations</h3>
-    <ul *ngIf="donations.length > 0; else noDonations">
-      <li *ngFor="let donation of donations">
-        💖 {{ donation.amount }} RON on
-        {{ donation.date | date : "mediumDate" }}
-      </li>
-    </ul>
-    <ng-template #noDonations>
-      <p>You haven't donated yet. 🙁</p>
-    </ng-template>
-
-    <hr />
-
-    <h3>Make a Donation</h3>
-    <form
-      (ngSubmit)="submitDonation()"
-      #donationForm="ngForm"
-      class="donation-form"
-    >
-      <label for="amount">One-Time Amount (RON)</label>
-      <input
-        type="number"
-        id="amount"
-        name="amount"
-        required
-        [(ngModel)]="donationAmount"
-        min="5"
-      />
-      <button type="submit">Donate Now</button>
-    </form>
-
-    <form
-      (ngSubmit)="startSubscription()"
-      #subscriptionForm="ngForm"
-      class="donation-form"
-    >
-      <label for="subscriptionAmount">Monthly Amount (RON)</label>
-      <input
-        type="number"
-        id="subscriptionAmount"
-        name="subscriptionAmount"
-        required
-        [(ngModel)]="subscriptionAmount"
-        min="5"
-      />
-      <button type="submit">Donate Monthly</button>
-    </form>
+        <!-- Secțiune Schimbare Parolă -->
+        <div class="setting-section" *ngIf="user.hasLocalPassword">
+          <h4>Schimbă Parola</h4>
+          <form (ngSubmit)="changePassword()" class="password-form">
+            <input
+              type="password"
+              name="currentPassword"
+              placeholder="Parola curentă"
+              required
+              [(ngModel)]="changePasswordData.currentPassword"
+            />
+            <input
+              type="password"
+              name="newPassword"
+              placeholder="Parola nouă"
+              required
+              [(ngModel)]="changePasswordData.newPassword"
+            />
+            <input
+              type="password"
+              name="confirmNewPassword"
+              placeholder="Confirmă parola nouă"
+              required
+              [(ngModel)]="changePasswordData.confirmNewPassword"
+            />
+            <button type="submit">Actualizează Parola</button>
+          </form>
+        </div>
+      </div>
+    </main>
   </div>
-</section>
+</div>

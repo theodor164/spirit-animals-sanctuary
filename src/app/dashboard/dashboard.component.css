@@ -1,114 +1,242 @@
-.page-container {
-  max-width: 900px;
+/* Importul fonturilor (opțional, dacă este deja global) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@400;700&display=swap");
+
+:host {
+  font-family: "Lato", sans-serif;
+}
+
+.dashboard-wrapper {
+  background-color: #f8f9fa;
+  min-height: 90vh;
+  padding: 2rem 1rem;
+}
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr; /* O singură coloană pe mobil */
+  gap: 2rem;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fdfaf6;
 }
 
-h2 {
-  font-size: 2.2rem;
+/* Sidebar (Coloana Stânga) */
+.sidebar {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+}
+
+.profile-header {
   text-align: center;
-  margin-bottom: 25px;
-  color: #333;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
-.user-info h3 {
-  font-size: 1.4rem;
-  margin-top: 30px;
-  color: #444;
-}
-
-ul {
-  padding-left: 20px;
-  margin: 10px 0 20px;
-}
-
-ul li {
-  margin-bottom: 8px;
-  font-size: 0.95rem;
-  color: #333;
-}
-
-/* Change password & donation forms */
-.donation-form,
-.form-group {
-  margin-top: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
   font-weight: 600;
-  font-size: 14px;
-  color: #555;
+  margin: 0 auto 1rem auto;
+  font-family: "Poppins", sans-serif;
 }
 
-.form-group input {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: 15px;
-  border: 1.8px solid #ccc;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  transition: border-color 0.3s ease;
+.profile-name {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
 }
 
-.form-group input:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+.profile-email {
+  font-size: 0.9rem;
+  color: #6b7280;
 }
 
-/* Donation form buttons */
-.donation-form button,
-.manage-billing-button {
-  width: 100%;
-  padding: 12px;
-  background-color: #007bff;
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-nav button {
+  text-align: left;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4b5563;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sidebar-nav button:hover {
+  background-color: #f3f4f6;
+}
+
+.sidebar-nav button.active {
+  background-color: #3b82f6;
   color: white;
   font-weight: 600;
-  border: none;
+}
+
+/* Main Content (Coloana Dreapta) */
+.main-content {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.content-panel h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1.5rem;
+}
+
+.content-panel p {
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Istoric Donații */
+.donations-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.donations-list th,
+.donations-list td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+.donations-list th {
+  font-weight: 600;
+  color: #374151;
+}
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  color: #6b7280;
+}
+
+/* Formulare Donație */
+.donation-forms-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+.donation-form {
+  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+.donation-form h4 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.donation-form label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.donation-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
-  font-size: 15px;
-  margin-top: 10px;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
 }
-
-.manage-billing-button {
-  background-color: #4caf50;
-}
-
-.manage-billing-button:hover {
-  background-color: #3d9240;
-}
-
-.donation-form button:hover {
-  background-color: #0056b3;
-}
-
-/* Section dividers */
-hr {
+.donation-form button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  border-radius: 6px;
   border: none;
-  border-top: 1px solid #ddd;
-  margin: 30px 0;
+  background-color: #16a34a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-/* Empty state or messages */
-p {
-  font-size: 0.95rem;
-  color: #444;
+/* Setări Cont */
+.setting-section {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.setting-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.setting-section h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.portal-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+.password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 400px;
+}
+.password-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+}
+.password-form button {
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background-color: #1f2937;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
 }
 
-p:not(:last-child) {
-  margin-bottom: 12px;
+.message-box {
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
-/* Donations */
-ul li::before {
-  content: "💖";
-  margin-right: 6px;
+/* Media Queries */
+@media (min-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 300px 1fr; /* Sidebar fix + conținut flexibil */
+  }
+  .donation-forms-container {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 /* În dashboard.component.css */

@@ -1,96 +1,182 @@
-.donate-once-hero {
-  text-align: center;
-  background-color: #fff5eb;
-  padding: 4rem 1rem;
+/* Importul fonturilor */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Lato:wght@400;700&display=swap");
+
+.page-wrapper {
+  font-family: "Lato", sans-serif;
+  background-color: #f3f4f6;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
-.donate-once-hero h1 {
-  font-size: 2.5rem;
+.donation-card {
+  width: 100%;
+  max-width: 550px;
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Antetul */
+.card-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.header-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem auto;
+  color: #ef4444; /* Un roșu pentru inimă */
+  background-color: #fee2e2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-icon svg {
+  width: 2rem;
+  height: 2rem;
+}
+.card-header h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+.card-header p {
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+/* Secțiunile formularului */
+.form-section {
+  margin-bottom: 2rem;
+}
+.section-label {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  color: #374151;
   margin-bottom: 1rem;
 }
 
-.donate-once-hero p {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1.1rem;
-  color: #555;
+/* Selector Sumă */
+.amount-selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
 }
-
-.donate-once-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  padding: 2rem;
-}
-
-.donate-options,
-.donate-form {
-  max-width: 400px;
-  flex: 1;
-}
-
-.amount-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.amount-buttons button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  background-color: #ffe0cc;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.amount-buttons button.selected,
-.amount-buttons button:hover {
-  background-color: #ff914d;
-  color: white;
-  border-color: #ff914d;
-}
-
-.custom-amount input {
-  padding: 0.6rem;
-  font-size: 1rem;
-  width: 100%;
-  margin-top: 0.5rem;
+.amount-selector button {
+  padding: 0.75rem;
+  border: 2px solid #e5e7eb;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
-
-.donate-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+.amount-selector button:hover {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
 }
-
-.donate-form label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
+.amount-selector button.selected {
+  border-color: #3b82f6;
+  background-color: #3b82f6;
+  color: white;
 }
-
-.donate-summary {
-  font-size: 1.1rem;
+.custom-amount {
   margin-top: 1rem;
 }
-
-button[type='button'] {
-  background-color: #ff914d;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.2s ease;
+.custom-amount label {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+.custom-amount input {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
 }
 
-button[type='button']:hover {
-  background-color: #ff7a1a;
+/* Inputuri Informații */
+.info-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.info-inputs input {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* GDPR */
+.terms-agreement {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+}
+.terms-agreement input[type="checkbox"] {
+  margin-top: 5px;
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+.terms-agreement label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+.terms-agreement a {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+/* Buton și mesaje */
+.captcha-container {
+  margin: 0 auto;
+}
+.message-box {
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.message-box.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #16a34a;
+  color: white;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.submit-button:hover:not([disabled]) {
+  background-color: #15803d;
+}
+.submit-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+@media (min-width: 640px) {
+  .amount-selector {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

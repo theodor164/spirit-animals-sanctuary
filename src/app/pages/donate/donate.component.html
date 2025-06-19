@@ -1,83 +1,155 @@
-<section class="page-container">
-  <section class="donate-hero">
-    <h1>Support Our Sanctuary</h1>
-    <p>Your kindness helps us provide a safe haven for animals in need.</p>
-  </section>
-
-  <section class="donate-options">
-    <div class="donate-box">
-      <h2>Donate Monthly</h2>
-      <p>Become a guardian angel by giving regularly.</p>
-      <a *ngIf="!isLoggedIn()" routerLink="/login" class="donate-button"
-        >Monthly Donation</a
-      >
-      <a *ngIf="isLoggedIn()" routerLink="/dashboard" class="donate-button"
-        >Monthly Donation</a
-      >
-    </div>
-    <div class="donate-box">
-      <h2>One-Time Donation</h2>
-      <p>Every contribution makes a difference.</p>
-      <a *ngIf="!isLoggedIn()" routerLink="/donate/once" class="donate-button"
-        >Donate Now</a
-      >
-      <a *ngIf="isLoggedIn()" routerLink="/dashboard" class="donate-button"
-        >Donate Now</a
-      >
+<div class="donate-page">
+  <!-- Secțiunea Erou -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Sprijină Misiunea Noastră</h1>
+      <p>
+        Fiecare donație, oricât de mică, aduce speranță și ajută la salvarea
+        unei vieți. Fii parte din povestea lor.
+      </p>
     </div>
   </section>
 
-  <section class="donate-info">
-    <h2>Other Ways to Help</h2>
-    <p>You can also donate via bank transfer, PayPal, or become a sponsor.</p>
-    <div class="donate-details">
-      <ul>
-        <li>
-          <strong>PayPal:</strong>
-          <a href="mailto:alexandrunicusorpopa@gmail.com"
-            >alexandrunicusorpopa&#64;gmail.com</a
+  <!-- Secțiunea Opțiuni Principale de Donație -->
+  <main class="main-content">
+    <div class="options-container">
+      <!-- Card Donație Unică -->
+      <div class="donate-card">
+        <div class="card-icon">
+          <!-- Iconiță Inimă -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
           >
-        </li>
-        <li>
-          <strong>Revolut:</strong>
-          revtag <strong>&#64;andreeta0z</strong> sau numărul de telefon
-          <strong>0734 902 430</strong>
-        </li>
-        <li>
-          <strong>Transfer bancar:</strong>
-          <ul>
-            <li>
-              <strong>Balaurea Andreea Raluca</strong><br />
-              Banca Transilvania<br />
-              Cont Lei:
-              <span style="word-break: break-all">RO93BTRLRONCRT0232664802</span
-              ><br />
-              Cont Euro:
-              <span style="word-break: break-all"
-                >RO70BTRLEURCRT0232664801</span
-              >
-            </li>
-            <li><strong>BT Pay:</strong> +40762 325 894</li>
-            <li>
-              <strong>ASOCIATIA LUI AMOS</strong><br />
-              <span style="word-break: break-all"
-                >RO66BTRLRONCRT0CT0807501</span
-              >
-            </li>
-          </ul>
-        </li>
-        <li>
-          Sprijiniți-ne pe Patreon, vă rugăm mult, printr-o donație
-          recurentă/lunară minusculă, chiar și de 1 dolar sau 2:<br />
-          <a
-            href="https://www.patreon.com/SpiritAnimalsSanctuary"
-            target="_blank"
-            rel="noopener"
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+            />
+          </svg>
+        </div>
+        <h2>Donație Unică</h2>
+        <p>
+          Orice contribuție contează și are un impact direct și imediat asupra
+          vieții animalelor noastre.
+        </p>
+        <!-- Logica pentru afișarea butoanelor rămâne aceeași -->
+        <a
+          *ngIf="!isLoggedIn()"
+          routerLink="/donate/once"
+          class="donate-button primary"
+          >Donează Acum</a
+        >
+        <a
+          *ngIf="isLoggedIn()"
+          routerLink="/dashboard"
+          class="donate-button primary"
+          >Donează Acum</a
+        >
+      </div>
+
+      <!-- Card Donație Lunară -->
+      <div class="donate-card">
+        <div class="card-icon">
+          <!-- Iconiță Calendar -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
           >
-            https://www.patreon.com/SpiritAnimalsSanctuary
-          </a>
-        </li>
-      </ul>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18M-4.5 12h22.5"
+            />
+          </svg>
+        </div>
+        <h2>Donație Lunară</h2>
+        <p>
+          Devino un susținător constant și oferă stabilitate și siguranță pe
+          termen lung rezidenților noștri.
+        </p>
+        <a
+          *ngIf="!isLoggedIn()"
+          routerLink="/login"
+          class="donate-button secondary"
+          >Devino Sponsor Lunar</a
+        >
+        <a
+          *ngIf="isLoggedIn()"
+          routerLink="/dashboard"
+          class="donate-button secondary"
+          >Devino Sponsor Lunar</a
+        >
+      </div>
+    </div>
+  </main>
+
+  <!-- Secțiunea "Alte Metode de Sprijin" -->
+  <section class="other-ways-section">
+    <div class="other-ways-container">
+      <h2>Alte Metode de a Ajuta</h2>
+      <p class="section-subtitle">
+        Dacă preferi o altă metodă de a contribui, iată opțiunile disponibile:
+      </p>
+
+      <div class="details-grid">
+        <!-- Detalii Transfer Bancar -->
+        <div class="detail-card">
+          <h4>Transfer Bancar</h4>
+          <p><strong>Balaurea Andreea Raluca (BT)</strong></p>
+          <p>
+            Cont LEI:
+            <span class="account-number">RO93BTRLRONCRT0232664802</span>
+          </p>
+          <p>
+            Cont EURO:
+            <span class="account-number">RO70BTRLEURCRT0232664801</span>
+          </p>
+          <p class="mt-2"><strong>ASOCIATIA LUI AMOS</strong></p>
+          <p>
+            Cont LEI:
+            <span class="account-number">RO66BTRLRONCRT0CT0807501</span>
+          </p>
+        </div>
+
+        <!-- Detalii Revolut & BT Pay -->
+        <div class="detail-card">
+          <h4>Plăți Rapide</h4>
+          <p>
+            <strong>Revolut:</strong> revtag <strong>&#64;andreeta0z</strong>
+          </p>
+          <p>Telefon: <strong>0734 902 430</strong></p>
+          <p class="mt-2"><strong>BT Pay:</strong> +40762 325 894</p>
+        </div>
+
+        <!-- Detalii PayPal & Patreon -->
+        <div class="detail-card">
+          <h4>Platforme Online</h4>
+          <p>
+            <strong>PayPal:</strong>
+            <a href="mailto:alexandrunicusorpopa@gmail.com" class="detail-link"
+              >alexandrunicusorpopa&#64;gmail.com</a
+            >
+          </p>
+          <p class="mt-2">
+            <strong>Patreon:</strong>
+            <a
+              href="https://www.patreon.com/SpiritAnimalsSanctuary"
+              target="_blank"
+              rel="noopener"
+              class="detail-link"
+              >Susține-ne pe Patreon</a
+            >
+          </p>
+        </div>
+      </div>
     </div>
   </section>
-</section>
+</div>

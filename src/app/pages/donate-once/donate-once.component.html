@@ -1,95 +1,121 @@
-<section class="page-container">
-  <section class="donate-once-hero">
-    <h1>Make a One-Time Donation</h1>
-    <p>
-      Your kindness can change lives. Every donation helps us rescue, feed, and
-      care for animals in need.
-    </p>
-  </section>
-
-  <section class="donate-once-wrapper">
-    <div class="donate-options">
-      <h2>Select an amount</h2>
-      <div class="amount-buttons">
-        <button
-          *ngFor="let amount of predefinedAmounts"
-          (click)="selectAmount(amount)"
-          [class.selected]="selectedAmount === amount"
+<div class="page-wrapper">
+  <div class="donation-card">
+    <!-- Antetul Cardului -->
+    <div class="card-header">
+      <div class="header-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
         >
-          €{{ amount }}
-        </button>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+          />
+        </svg>
       </div>
-      <div class="custom-amount">
-        <label>
-          Or enter a custom amount:
+      <h2>Donație Unică</h2>
+      <p>
+        Gestul tău de bunătate poate schimba o viață. Fiecare contribuție ajută
+        la salvarea și îngrijirea animalelor noastre.
+      </p>
+    </div>
+
+    <!-- Formularul -->
+    <form #donateForm="ngForm" novalidate>
+      <!-- Selector Sumă -->
+      <div class="form-section">
+        <label class="section-label">Alege o sumă</label>
+        <div class="amount-selector">
+          <button
+            *ngFor="let amount of predefinedAmounts"
+            type="button"
+            (click)="selectAmount(amount)"
+            [class.selected]="selectedAmount === amount && !customAmount"
+          >
+            {{ amount }} LEI
+          </button>
+        </div>
+        <div class="custom-amount">
+          <label for="customAmount">Sau introdu o altă sumă (LEI)</label>
           <input
+            id="customAmount"
             type="number"
             [(ngModel)]="customAmount"
             (input)="updateSelectedAmount()"
-            placeholder="e.g. 25"
+            name="customAmount"
+            placeholder="ex: 75"
           />
-        </label>
+        </div>
       </div>
-    </div>
 
-    <div class="donate-form">
-      <h2>Your Information</h2>
-      <form #donateForm="ngForm">
-        <label>
-          Full Name:
-          <input type="text" [(ngModel)]="form.name" name="name" required />
-        </label>
-        <label>
-          Email Address:
-          <input type="email" [(ngModel)]="form.email" name="email" required />
-        </label>
-
-        <div class="donate-summary">
-          <p><strong>Donation:</strong> €{{ selectedAmount || 0 }}</p>
-        </div>
-
-        <!-- NEW: reCAPTCHA Component -->
-        <div class="form-group captcha-container">
-          <ngx-invisible-recaptcha
-            #captchaElem
-            [siteKey]="recaptchaSiteKey"
-            (success)="handleRecaptchaSuccess($event)"
-          >
-          </ngx-invisible-recaptcha>
-        </div>
-
-        <!-- NEW: GDPR and Terms Agreement Checkbox -->
-        <div class="form-group terms-agreement">
+      <!-- Informații Personale -->
+      <div class="form-section">
+        <label class="section-label">Datele tale</label>
+        <div class="info-inputs">
           <input
-            type="checkbox"
-            id="terms-donate"
-            name="agreedToTerms"
-            [(ngModel)]="agreedToTerms"
+            type="text"
+            [(ngModel)]="form.name"
+            name="name"
+            placeholder="Numele tău complet"
             required
           />
-          <label for="terms-donate">
-            Am citit și sunt de acord cu
-            <a routerLink="/terms-and-conditions" target="_blank"
-              >Termenii și Condițiile</a
-            >
-            și cu
-            <a routerLink="/privacy" target="_blank"
-              >Politica de Confidențialitate</a
-            >.
-          </label>
+          <input
+            type="email"
+            [(ngModel)]="form.email"
+            name="email"
+            placeholder="Adresa ta de e-mail"
+            required
+            email
+          />
         </div>
+      </div>
 
-        <div class="error" *ngIf="message">{{ message }}</div>
+      <!-- reCAPTCHA -->
+      <div class="captcha-container">
+        <ngx-invisible-recaptcha
+          #captchaElem
+          [siteKey]="recaptchaSiteKey"
+          (success)="handleRecaptchaSuccess($event)"
+        ></ngx-invisible-recaptcha>
+      </div>
 
-        <!-- UPDATED: Button is disabled until terms are accepted -->
-        <button
-          type="button"
-          (click)="handleDonationClick(donateForm)"
-          [disabled]="donateForm.invalid || !agreedToTerms"
-        >
-          Donate Now
-        </button>
-      </form>
-    </div>
-  </section>
-</section>
+      <!-- Consimțământ GDPR -->
+      <div class="terms-agreement">
+        <input
+          type="checkbox"
+          id="terms-donate"
+          name="agreedToTerms"
+          [(ngModel)]="agreedToTerms"
+          required
+        />
+        <label for="terms-donate">
+          Am citit și sunt de acord cu
+          <a routerLink="/terms-and-conditions" target="_blank">Termenii</a> și
+          <a routerLink="/privacy" target="_blank"
+            >Politica de Confidențialitate</a
+          >.
+        </label>
+      </div>
+
+      <!-- Mesaje de Feedback -->
+      <div *ngIf="message" class="message-box" [class.error]="isError">
+        {{ message }}
+      </div>
+
+      <!-- Buton de Trimitere -->
+      <button
+        type="button"
+        (click)="handleDonationClick(donateForm)"
+        [disabled]="isLoading || donateForm.invalid || !agreedToTerms"
+        class="submit-button"
+      >
+        <span *ngIf="!isLoading">Donează {{ selectedAmount }} LEI</span>
+        <span *ngIf="isLoading">Se procesează...</span>
+      </button>
+    </form>
+  </div>
+</div>

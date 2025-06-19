@@ -1,106 +1,214 @@
-.donate-hero {
-  background: #fef6f0;
+/* Importul fonturilor */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lato:wght@400;700&display=swap");
+
+.donate-page {
+  font-family: "Lato", sans-serif;
+  background-color: #f8f9fa;
+}
+
+/* Secțiunea Erou */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("/assets/images/donate-hero.jpg");
+  background-size: cover;
+  background-position: top;
   text-align: center;
-  padding: 4rem 1rem;
+  padding: 5rem 1.5rem;
+  color: white;
+  margin-top: -64px;
+  height: 60vh;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
-.donate-hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+.hero-content h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
-.donate-hero p {
-  font-size: 1.25rem;
-  color: #555;
+.hero-content p {
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
 }
 
-.donate-options {
+/* Conținutul Principal */
+.main-content {
+  padding: 4rem 1.5rem;
+}
+
+.options-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem 1rem;
-  background: #fff;
+  gap: 2.5rem;
+  max-width: 1160px;
+  margin: 0 auto;
 }
 
-.donate-box {
-  background: #f3f3f3;
-  padding: 2rem;
+.donate-card {
+  background-color: white;
   border-radius: 12px;
-  width: 280px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 350px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.donate-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1.5rem auto;
+  color: #16a34a; /* Un verde încrezător */
+  background-color: #ecfdf5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.donate-card h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #1f2937;
+}
+
+.donate-card p {
+  color: #4b5563;
+  line-height: 1.6;
+  flex-grow: 1; /* Asigură că textul umple spațiul disponibil */
+  margin-bottom: 2rem;
 }
 
 .donate-button {
   display: inline-block;
-  margin-top: 1rem;
   padding: 0.75rem 1.5rem;
-  background: #ff6b6b;
-  color: #fff;
+  border-radius: 8px;
   text-decoration: none;
-  border-radius: 6px;
-  font-weight: bold;
-  transition: background 0.3s ease;
+  font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
-.donate-button:hover {
-  background: #e85050;
+.donate-button.primary {
+  background-color: #16a34a;
+  color: white;
+}
+.donate-button.primary:hover {
+  background-color: #15803d;
+  transform: scale(1.05);
 }
 
-.donate-info {
-  padding: 3rem 1rem;
-  background: #fafafa;
+.donate-button.secondary {
+  background-color: transparent;
+  color: #16a34a;
+  border: 2px solid #16a34a;
+}
+.donate-button.secondary:hover {
+  background-color: #16a34a;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Secțiunea "Alte Metode" */
+.other-ways-section {
+  background-color: #eef2ff; /* Un albastru-gri deschis */
+  padding: 4rem 1.5rem;
+}
+
+.other-ways-container {
+  max-width: 1100px;
+  margin: 0 auto;
   text-align: center;
 }
 
-.donate-info ul {
-  list-style: none;
-  padding: 0;
+.other-ways-container h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
 }
 
-.donate-info li {
-  margin: 0.5rem 0;
-  font-weight: 500;
+.section-subtitle {
+  color: #4b5563;
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
 }
 
-.donation-ranking {
-  margin-top: 40px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 12px;
-}
-
-.donation-ranking h2 {
-  margin-bottom: 20px;
-  color: #444;
-  text-align: center;
-}
-
-.donation-ranking ul {
-  list-style: none;
-  padding: 0;
-}
-
-.donation-ranking li {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 14px;
-  border-bottom: 1px solid #ddd;
-  font-size: 16px;
-}
-
-.donation-ranking .rank {
-  font-weight: bold;
-  color: #ff6b6b;
-  width: 40px;
-}
-
-.donation-ranking .name {
-  flex: 1;
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
   text-align: left;
 }
 
-.donation-ranking .amount {
-  font-weight: bold;
+.detail-card {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+}
+
+.detail-card h4 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 0.75rem;
+}
+
+.detail-card p {
+  color: #374151;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.detail-card .mt-2 {
+  margin-top: 0.75rem;
+}
+
+.account-number {
+  font-weight: 700;
+  color: #111827;
+  word-break: break-all;
+}
+
+.detail-link {
+  color: #3b82f6;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.detail-link:hover {
+  color: #2563eb;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .hero-content h1 {
+    font-size: 3.5rem;
+  }
 }

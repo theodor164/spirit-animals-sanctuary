@@ -16,13 +16,15 @@ import { RouterLink } from '@angular/router';
 export class DonateOnceComponent {
   @ViewChild('captchaElem') captchaElem!: InvisibleReCaptchaComponent;
 
-  predefinedAmounts: number[] = [10, 25, 50, 100];
-  selectedAmount: number | null = 25;
+  predefinedAmounts: number[] = [25, 50, 100, 250];
+  selectedAmount: number | null = 100;
   customAmount: number | null = null;
   private formData: NgForm | null = null;
 
   form = { name: '', email: '' };
   message: string = '';
+  isError: boolean = false;
+  isLoading: boolean = false;
   stripePromise: Promise<Stripe | null>;
   recaptchaSiteKey = '6Ldr-2ErAAAAADW1yRNfbiY1Wu3LI_UYXRg2v2Q2'; // Replace with your key
 
@@ -48,20 +50,25 @@ export class DonateOnceComponent {
 
   handleDonationClick(form: NgForm) {
     this.message = '';
+    this.isError = false;
     if (!this.selectedAmount || this.selectedAmount <= 0) {
-      this.message = 'Please select or enter a valid donation amount.';
+      this.message = 'Vă rugăm să selectați sau să introduceți o sumă validă.';
+      this.isError = true;
       return;
     }
     if (!form.value.name || !form.value.email) {
-      this.message = 'Please fill in your name and email address.';
+      this.message = 'Vă rugăm să completați numele și adresa de e-mail.';
+      this.isError = true;
       return;
     }
     if (!this.agreedToTerms) {
       this.message =
-        'You must agree to the Terms and Privacy Policy to donate.';
+        'Trebuie să fiți de acord cu Termenii și Politica de Confidențialitate pentru a dona.';
+      this.isError = true;
       return;
     }
 
+    this.isLoading = true;
     this.formData = form;
     this.captchaElem.execute();
   }
@@ -76,6 +83,7 @@ export class DonateOnceComponent {
       name: this.formData.value.name,
       email: this.formData.value.email,
       recaptchaToken: token,
+      agreedToTerms: this.agreedToTerms, // Adăugăm starea checkbox-ului
     };
 
     this.http
@@ -85,16 +93,20 @@ export class DonateOnceComponent {
       )
       .subscribe({
         next: async (session) => {
+          this.isLoading = false;
           const stripe = await this.stripePromise;
           if (stripe) {
             stripe.redirectToCheckout({ sessionId: session.id });
           } else {
-            this.message = 'Stripe could not be loaded.';
+            this.message = 'Serviciul de plăți nu a putut fi încărcat.';
+            this.isError = true;
           }
         },
         error: (err) => {
+          this.isLoading = false;
+          this.isError = true;
           this.message =
-            err.error?.errors?.[0]?.msg || 'Failed to create checkout session.';
+            err.error?.errors?.[0]?.msg || 'Crearea sesiunii de plată a eșuat.';
           this.captchaElem.resetCaptcha();
         },
       });

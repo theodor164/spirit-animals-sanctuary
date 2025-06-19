@@ -1,77 +1,202 @@
-.volunteer-hero {
-  background: #fff4e6;
-  padding: 4rem 1rem;
+/* Importul fonturilor */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap");
+
+/* Stiluri generale */
+.volunteer-page {
+  font-family: "Roboto", sans-serif;
+  background-color: #f9fafb;
+}
+
+/* Secțiunea Erou (neschimbată) */
+.hero-section {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-image: url("/assets/images/volunteer-hero.jpg");
+  background-size: cover;
+  background-position: top;
+  margin-top: -64px;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.hero-text {
+  position: relative;
+  z-index: 10;
+}
+.hero-text h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+}
+.hero-text p {
+  font-size: 1.2rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* Secțiunile de conținut (neschimbate) */
+.info-section,
+.activities-section,
+.process-section {
+  padding: 4rem 1.5rem;
+}
+.info-container,
+.activities-header,
+.process-header {
+  max-width: 900px;
+  margin: 0 auto;
   text-align: center;
 }
+.info-container h2,
+.activities-header h2,
+.process-header h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+.info-container p,
+.activities-header p,
+.process-header p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4b5563;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-.volunteer-hero h1 {
-  font-size: 3rem;
+/* Gridul de activități și pașii (neschimbate) */
+.activities-section {
+  background-color: #ffffff;
+}
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.activity-card {
+  background-color: #f9fafb;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+.activity-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+.activity-card h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
 }
-
-.volunteer-hero p {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1.2rem;
-  color: #555;
+.activity-card p {
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.6;
 }
-
-.volunteer-content {
+.process-steps {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 3rem 1rem;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  position: relative;
 }
-
-.volunteer-info {
-  max-width: 500px;
+.step-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
 }
-
-.volunteer-info h2 {
+.step-number {
+  font-family: "Poppins", sans-serif;
   font-size: 2rem;
+  font-weight: 700;
+  color: #d1d5db;
+}
+.step-content h4 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+.step-content p {
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* --- STILURI NOI PENTRU SECȚIUNEA CTA --- */
+.cta-section {
+  background-color: #e5e7eb; /* Un gri deschis pentru contrast */
+  padding: 4rem 1.5rem;
+}
+
+.cta-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: white;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.cta-container h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1f2937;
   margin-bottom: 1rem;
 }
 
-.volunteer-info p {
-  font-size: 1.1rem;
-  color: #444;
-}
-
-.volunteer-info ul {
-  list-style: disc;
-  margin-left: 1.5rem;
-  margin-top: 1rem;
-  color: #333;
+.cta-container p {
+  color: #4b5563;
+  margin-bottom: 2rem;
+  line-height: 1.7;
 }
 
 .cta-button {
   display: inline-block;
-  margin-top: 2rem;
-  padding: 0.75rem 1.5rem;
-  background-color: #ff914d;
+  background-color: #16a34a; /* Un verde puternic, ca îndemn la acțiune */
   color: white;
-  text-decoration: none;
-  font-weight: bold;
+  padding: 0.85rem 2.5rem;
   border-radius: 8px;
-  transition: background-color 0.2s ease;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
 }
 
 .cta-button:hover {
-  background-color: #ff7b26;
+  background-color: #15803d;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(22, 163, 74, 0.3);
 }
 
-.volunteer-gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.volunteer-img {
-  border-radius: 12px;
-  max-width: 100%;
-  height: auto;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+/* --- AM ELIMINAT STILURILE PENTRU FORMULAR --- */

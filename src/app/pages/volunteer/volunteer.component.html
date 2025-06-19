@@ -1,38 +1,69 @@
-<section class="page-container">
-  <section class="volunteer-hero">
-    <h1>Become a Volunteer</h1>
-    <p>
-      Join our mission to care for rescued animals and be part of a kind-hearted
-      community making a difference.
-    </p>
+<div class="volunteer-page">
+  <!-- Secțiunea Erou -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Fii Eroul Lor. Devino Voluntar.</h1>
+      <p>Timpul și dedicarea ta pot schimba o viață.</p>
+    </div>
   </section>
 
-  <section class="volunteer-content">
-    <div class="volunteer-info">
-      <h2>Why Volunteer With Us?</h2>
+  <!-- Secțiunea "De ce?" -->
+  <section class="info-section">
+    <div class="info-container">
+      <h2>De ce să fii voluntar?</h2>
       <p>
-        At Spirit Animals Sanctuary, volunteering is more than just helping —
-        it's connecting with animals, nature, and like-minded people who care
-        deeply about compassion and healing.
+        Alătură-te echipei noastre dedicate pentru a oferi un refugiu sigur
+        celor 90 de suflete remarcabile de animale. Experimentează bucuria de a
+        hrăni și de a îngriji aceste ființe minunate, fiind martor direct la
+        vindecarea și fericirea lor.
       </p>
-      <ul>
-        <li>Help care for over 90 rescued animals</li>
-        <li>Support daily sanctuary operations</li>
-        <li>Assist with feeding, cleaning, and enrichment</li>
-        <li>Contribute to special projects and events</li>
-      </ul>
-      <a class="cta-button" routerLink="/contact">Join Us Now</a>
-    </div>
-
-    <div class="volunteer-gallery">
-      <img
-        *ngFor="let image of images"
-        [ngSrc]="image"
-        alt="Volunteer Activity"
-        class="volunteer-img"
-        width="400"
-        height="300"
-      />
     </div>
   </section>
-</section>
+
+  <!-- Secțiunea "Activități" -->
+  <section class="activities-section">
+    <div class="activities-header">
+      <h2>Cum Poți Ajuta?</h2>
+      <p>
+        Activitățile de voluntariat sunt variate și esențiale pentru bunul mers
+        al sanctuarului.
+      </p>
+    </div>
+    <div class="activities-grid">
+      <div *ngFor="let activity of activities" class="activity-card">
+        <div class="activity-icon">{{ activity.icon }}</div>
+        <h3>{{ activity.title }}</h3>
+        <p>{{ activity.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Secțiunea "Procesul de Aplicare" -->
+  <section class="process-section">
+    <div class="process-header">
+      <h2>Pașii Următori</h2>
+    </div>
+    <div class="process-steps">
+      <div *ngFor="let step of applicationSteps" class="step-card">
+        <div class="step-number">{{ step.step }}</div>
+        <div class="step-content">
+          <h4>{{ step.title }}</h4>
+          <p>{{ step.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOU: Secțiunea "Call to Action" care înlocuiește formularul -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <h2>Ești gata să faci o diferență?</h2>
+      <p>
+        Dacă simți că vrei să te alături misiunii noastre, te rugăm să ne scrii.
+        Așteptăm cu nerăbdare să te cunoaștem!
+      </p>
+      <a routerLink="/contact" class="cta-button">Contactează-ne</a>
+    </div>
+  </section>
+</div>

@@ -1,15 +1,15 @@
 <section class="login-wrapper">
   <form #loginForm="ngForm" class="login-form">
-    <h2>Welcome Back</h2>
+    <h2>Bine ai Venit</h2>
 
     <label for="email">Email</label>
     <input type="email" id="email" name="email" ngModel required />
 
-    <label for="password">Password</label>
+    <label for="password">Parola</label>
     <input type="password" id="password" name="password" ngModel required />
 
     <div class="form-footer-link">
-      <a routerLink="/forgot-password">Forgot your password?</a>
+      <a routerLink="/forgot-password">Ai uitat parola?</a>
     </div>
 
     <!-- NEW: reCAPTCHA Component -->
@@ -30,10 +30,10 @@
       (click)="handleLoginClick(loginForm)"
       [disabled]="loginForm.invalid"
     >
-      Login
+      Conectare
     </button>
     <button type="button" routerLink="/register" class="secondary-btn">
-      Register
+      Inregistrare
     </button>
 
     <div class="or-divider"><span>OR</span></div>
@@ -46,7 +46,7 @@
         src="https://developers.google.com/identity/images/g-logo.png"
         alt="Google logo"
       />
-      Sign in with Google
+      Autentificare cu Google
     </a>
   </form>
 </section>

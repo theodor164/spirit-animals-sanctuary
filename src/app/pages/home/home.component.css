@@ -1,6 +1,6 @@
 .hero-section {
   height: 75vh;
-  background-image: url("https://spiritanimals.ro/wp-content/uploads/2023/08/received_1818580991862288.jpg");
+  background-image: url("/assets/images/home-page-photo-1.jpg");
   background-attachment: fixed; /* 💡 Key for parallax */
   background-size: cover;
   background-position: center;

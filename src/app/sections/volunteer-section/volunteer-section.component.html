@@ -1,52 +1,51 @@
-<section class="volunteer-section">
-  <div class="volunteer-section-content">
-    <h2>Devino voluntar</h2>
-    <p>
-      Alătură-te echipei noastre dedicate pentru a oferi un refugiu sigur celor
-      90 de suflete remarcabile de animale. Experimentează bucuria de a hrăni și
-      de a îngriji aceste ființe minunate, fiind martor direct la vindecarea și
-      fericirea lor. Ca voluntar, vei lega conexiuni cu alți iubitori de animale
-      și vei contribui la o comunitate prosperă, plină de bunătate. Împreună,
-      putem avea un impact profund asupra vieților rezidenților noștri
-      necuvântători, încurajând în același timp dezvoltarea personală și o
-      apreciere mai profundă pentru legătura remarcabilă dintre oameni și
-      animale.
-    </p>
-    <div class="gallery-section">
-      <div class="gallery-grid">
-        <img
-          *ngFor="let image of images; let i = index"
-          [ngSrc]="image"
-          alt="Gallery Image {{ i + 1 }}"
-          class="gallery-image"
-          (click)="openLightbox(i)"
-          width="278.75"
-          height="209.06"
-        />
-      </div>
+<section class="volunteer-section-wrapper">
+  <div class="volunteer-container">
+    <!-- Coloana din stânga: Text și Call-to-Action -->
+    <div class="text-content">
+      <h2 class="section-title">Devino Voluntar</h2>
+      <p class="section-paragraph">
+        Alătură-te echipei noastre dedicate pentru a oferi un refugiu sigur
+        celor 90 de suflete remarcabile de animale. Experimentează bucuria de a
+        hrăni și de a îngriji aceste ființe minunate, fiind martor direct la
+        vindecarea și fericirea lor. Ca voluntar, vei lega conexiuni cu alți
+        iubitori de animale și vei contribui la o comunitate prosperă, plină de
+        bunătate.
+      </p>
+      <a routerLink="/volunteer" class="volunteer-link">Află mai multe</a>
+    </div>
 
-      <div
-        class="lightbox"
-        *ngIf="lightboxOpen"
-        (click)="onBackdropClick($event)"
-      >
-        <div class="lightbox-content" #lightboxContent>
-          <span class="close" (click)="closeLightbox()">&times;</span>
-          <a class="prev" (click)="prevImage()">❮</a>
-          <ng-container *ngFor="let image of imagesScaled; let i = index">
-            <img
-              *ngIf="i === currentIndex"
-              [ngSrc]="image"
-              alt="Volunteer Image"
-              class="lightbox-image"
-              [width]="imageWidths[i]"
-              [height]="imageHeights[i]"
-            />
-          </ng-container>
-          <a class="next" (click)="nextImage()">❯</a>
+    <!-- Coloana din dreapta: Galerie foto -->
+    <div class="gallery-content">
+      <div class="gallery-grid">
+        <div
+          *ngFor="let item of gallery; let i = index"
+          class="gallery-image-wrapper"
+          (click)="openLightbox(i)"
+        >
+          <img
+            [ngSrc]="item.thumbnail"
+            [alt]="item.alt"
+            width="278"
+            height="209"
+            priority="true"
+            class="gallery-image"
+          />
         </div>
       </div>
     </div>
-    <a routerLink="/volunteer" class="volunteer-link">Afla mai multe</a>
   </div>
 </section>
+
+<!-- Lightbox (fereastra modală pentru poze) -->
+<div class="lightbox" *ngIf="lightboxOpen" (click)="onBackdropClick($event)">
+  <div class="lightbox-content" #lightboxContent>
+    <button class="close-btn" (click)="closeLightbox()">&times;</button>
+    <button class="nav-btn prev" (click)="prevImage()">&#10094;</button>
+    <img
+      [src]="gallery[currentIndex].full"
+      [alt]="gallery[currentIndex].alt"
+      class="lightbox-image"
+    />
+    <button class="nav-btn next" (click)="nextImage()">&#10095;</button>
+  </div>
+</div>

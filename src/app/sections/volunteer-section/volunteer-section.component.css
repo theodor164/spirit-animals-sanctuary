@@ -1,121 +1,187 @@
-.gallery-section {
-  background-color: #f3f3f3;
-  padding: 2rem 0;
+/* Importul fonturilor (opțional, dacă este deja global) */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap");
+
+/* Containerul principal al secțiunii */
+.volunteer-section-wrapper {
+  background-color: #ffffff;
+  padding: 5rem 1.5rem;
+  font-family: "Lato", sans-serif;
+}
+
+.volunteer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr; /* O singură coloană pe mobil */
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Coloana cu text */
+.text-content {
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+}
+
+.section-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.section-paragraph {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #7f8c8d;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.volunteer-link {
+  display: inline-block;
+  background-color: #e74c3c;
+  color: white;
+  padding: 0.8rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.volunteer-link:hover {
+  background-color: #c0392b;
+  transform: translateY(-3px);
+}
+
+/* Coloana cu galerie */
+.gallery-content {
+  animation: fadeIn 1s ease-out 0.2s;
+  animation-fill-mode: backwards;
 }
 
 .gallery-grid {
-  display: flex;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
-.gallery-grid img {
-  height: auto;
+.gallery-image-wrapper {
+  aspect-ratio: 4 / 3; /* Raport de aspect plăcut pentru imagini */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  border-radius: 8px;
-  transition: transform 0.2s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.gallery-grid img:hover {
+.gallery-image-wrapper:hover {
   transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
+.gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Lightbox Modernizat */
 .lightbox {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.75); /* semi-transparent white */
+  background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  animation: fadeIn 0.3s ease;
 }
 
 .lightbox-content {
   position: relative;
-  max-width: 80%;
-  margin: 0 auto;
+  max-width: 90vw;
+  max-height: 90vh;
 }
 
 .lightbox-image {
   max-width: 100%;
-  height: auto;
-  max-height: 961px;
-  display: block;
+  max-height: 90vh;
   border-radius: 8px;
-  margin: 0 auto;
-  padding: 40px 0;
-  box-sizing: border-box;
 }
 
-.close {
+.close-btn {
   position: absolute;
-  right: 0;
-  font-size: 2rem;
+  top: -2.5rem;
+  right: -1rem;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: white;
   cursor: pointer;
-  color: #ffffff;
+  background: none;
+  border: none;
 }
 
-.prev,
-.next {
+.nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 3rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  color: #ffffff;
-  padding: 0 1rem;
-  user-select: none;
-  z-index: 1001;
+  transition: background-color 0.2s;
+}
+.nav-btn:hover {
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .prev {
-  left: -60px;
+  left: -4rem;
 }
-
 .next {
-  right: -60px;
+  right: -4rem;
 }
 
-.volunteer-section {
-  padding-top: 62px;
-  padding-bottom: 74px;
-  background-color: #f3f3f3;
-  
-}
-
-.volunteer-section-content {
-  max-width: 94%;
-  margin: 0 auto;
-  width: 1160px;
-}
-
-.volunteer-link {
-  display: inline-block;
-  padding: 1rem 2rem;
-  margin-top: 1rem;
-  background-color: #ffffff;
-  color: #2c2c2c;
-  text-decoration: none;
-  border: 2px solid #2c2c2c;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1.1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.volunteer-link:hover {
-  background-color: #2c2c2c;
-  color: #ffffff;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-@media (max-width: 1205px) {
-  .gallery-grid {
-    flex-wrap: wrap;
-    justify-content: center;
+/* Animație */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Media Query */
+@media (min-width: 768px) {
+  .volunteer-container {
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+  }
+  .text-content {
+    text-align: left;
+  }
+  .section-paragraph,
+  .volunteer-link {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .section-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-btn {
+    display: none;
+  } /* Ascundem săgețile pe mobil */
 }

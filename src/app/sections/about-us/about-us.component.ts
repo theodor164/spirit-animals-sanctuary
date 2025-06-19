@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-about-us',
-  imports: [NgOptimizedImage],
+  standalone: true, // Asumând că este standalone
+  imports: [NgOptimizedImage, CommonModule, RouterModule],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.css',
 })

@@ -1,109 +1,112 @@
-.about-us-header h2 {
-  position: relative;
-  color: #e5e5e5;
-  font-family: "Lato";
-  font-weight: 900;
-  font-style: normal;
-  margin-bottom: 0;
-  font-size: 10em;
-  letter-spacing: -6px;
-  margin-top: -120px;
-  margin-left: 100px;
+/* Importul fonturilor (opțional, dacă este deja global) */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap");
+
+/* Containerul principal al paginii */
+.about-page-wrapper {
+  background-color: #fbfbfb; /* Un alb foarte cald */
+  padding: 4rem 1.5rem;
+  font-family: "Lato", sans-serif;
 }
 
-.about-us-section {
-  background-color: #f3f3f3;
-  padding: 4rem 1rem;
-  min-height: 50vh;
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr; /* O singură coloană pe mobil */
+  align-items: center;
+  gap: 3rem;
 }
 
-.about-us-text-1 {
-  font-size: 1.4em;
-  letter-spacing: 0.01em;
-  margin: 0 0 0.45em;
-  font-family: "Public Sans", sans-serif;
+/* Coloana cu text */
+.text-content {
+  animation: fadeIn 1s ease-out;
+}
+
+.main-title {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
   font-weight: 700;
-  padding-right: 15%;
+  color: #2c3e50; /* Un albastru-gri închis, elegant */
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
 }
 
-.about-us-text-2 p,
-.about-us-text-3 p {
-  margin: 0 0 0.2em;
-  padding: 0;
-  font-family: "Public Sans", sans-serif;
-  font-weight: 400;
-  font-size: 1em;
-  letter-spacing: 1px;
+.lead-paragraph {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #34495e;
+  line-height: 1.7;
+  margin-bottom: 2rem;
 }
 
-.about-us-text-2,
-.about-us-text-3 {
-  color: grey;
+.divider {
+  height: 3px;
+  width: 80px;
+  background-color: #e74c3c; /* Un roșu-coral ca accent de culoare */
+  margin-bottom: 2rem;
 }
 
-.about-us-image {
-  flex: 0 0 auto;
-  max-width: 361.938px;
-  max-height: 242.797px;
-  width: 100%;
-  margin-bottom: 40px;
+.main-text p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #7f8c8d; /* Un gri mai deschis pentru lizibilitate */
+  margin-bottom: 1.5rem;
 }
 
-.about-image {
+/* Coloana cu imagine */
+.image-content {
+  animation: fadeIn 1s ease-out 0.2s; /* Animație cu o mică întârziere */
+  animation-fill-mode: backwards; /* Asigură că starea inițială este cea din animație */
+}
+
+.image-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(44, 62, 80, 0.15);
+  position: relative;
+}
+
+.main-image {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  transition: transform 0.4s ease;
 }
 
-.about-us-top-container,
-.about-us-bottom-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  max-width: 1160px;
+.image-wrapper:hover .main-image {
+  transform: scale(1.05);
 }
 
-.about-us-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-@media (max-width: 1250px) {
-  .about-us-image {
-    max-width: 31%; /* Shrink relative to parent */
+/* Animație de apariție */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  .about-us-header h2 {
-    margin-left: 0;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (max-width: 768px) {
-  .about-us-top-container {
-    flex-direction: column; /* Stack elements vertically */
+/* Media Query pentru layout-ul pe două coloane pe ecrane mai mari */
+@media (min-width: 768px) {
+  .about-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
   }
 
-  .about-us-image {
-    max-width: 99%; /* Full width on smaller screens */
-    max-height: 100%; /* Maintain aspect ratio */
+  .main-title {
+    font-size: 3.25rem;
   }
 }
 
-@media (max-width: 680px) {
-  .about-us-bottom-container {
-    flex-direction: column; /* Stack elements vertically */
+@media (min-width: 1024px) {
+  /* Aliniem textul la stânga și imaginea la dreapta */
+  .text-content {
+    grid-column: 1 / 2;
   }
-
-  .about-us-header h2 {
-    display: none;
-  }
-
-  .about-us-text-1 h3 {
-    margin-top: -40px;
+  .image-content {
+    grid-column: 2 / 3;
   }
 }

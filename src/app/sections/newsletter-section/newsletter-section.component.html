@@ -1,0 +1,36 @@
+<section class="newsletter-wrapper">
+  <div class="newsletter-container">
+    <div class="text-content">
+      <h2 class="section-title">Rămâi Conectat</h2>
+      <p class="section-description">
+        Abonează-te la newsletter-ul nostru pentru a primi direct în inbox
+        povești de la sanctuar, noutăți despre rezidenți și informații despre
+        evenimentele viitoare. Fii primul care află cum poți face o diferență.
+      </p>
+    </div>
+    <div class="form-content">
+      <form
+        #newsletterForm="ngForm"
+        (ngSubmit)="subscribe(newsletterForm)"
+        class="subscription-form"
+      >
+        <input
+          type="email"
+          name="email"
+          ngModel
+          placeholder="Adresa ta de e-mail"
+          required
+          email
+          #emailInput="ngModel"
+        />
+        <button type="submit" [disabled]="newsletterForm.invalid || isLoading">
+          <span *ngIf="!isLoading">Abonează-te</span>
+          <span *ngIf="isLoading">Se trimite...</span>
+        </button>
+      </form>
+      <div *ngIf="message" class="message-box" [class.success]="!isError">
+        {{ message }}
+      </div>
+    </div>
+  </div>
+</section>

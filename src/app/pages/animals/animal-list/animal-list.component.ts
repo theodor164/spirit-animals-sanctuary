@@ -27,7 +27,7 @@ export class AnimalListComponent implements OnInit {
     {
       id: 1,
       name: 'Amos',
-      status: 'Caută un sponsor',
+      status: 'Caută o inima pe care sa o vindece',
       imageUrl: 'assets/images/animals/amos-1.jpg',
     },
     {
@@ -39,7 +39,7 @@ export class AnimalListComponent implements OnInit {
     {
       id: 3,
       name: 'Lyra',
-      status: 'Caută un sponsor',
+      status: 'Caută un parinte adoptiv',
       imageUrl: 'assets/images/animals/lyra-1.jpg',
     },
     {

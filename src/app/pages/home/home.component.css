@@ -10,7 +10,7 @@
   position: relative;
   color: white;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
-  margin-top: -64px; /* Adjust based on header height */
+  margin-top: -64px; 
 }
 
 @media (max-width: 1280px) {

@@ -1,61 +1,68 @@
-<div class="page-container">
-  <!-- Antetul Secțiunii -->
-  <header class="page-header">
-    <h1>Faceți cunoștință cu Rezidenții Noștri</h1>
-    <p>
-      Fiecare suflet de aici are o poveste unică și așteaptă cu speranță un
-      ajutor de la oamenii iubitori. Descoperă-i și lasă-te cucerit.
-    </p>
-  </header>
+<!-- NOU: Secțiunea Erou adăugată -->
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-text">
+    <h1>Sufletele Noastre</h1>
+    <p>O șansă la viață, o promisiune de iubire</p>
+  </div>
+</section>
 
-  <!-- Grila de Poze -->
-  <div class="gallery-grid">
-    <!-- Iterăm prin lista de animale afișate -->
-    <div
-      *ngFor="let animal of displayedAnimals; let i = index"
-      class="gallery-card"
-      [style.animation-delay.ms]="100 * (i + 1)"
-    >
-      <img
-        [src]="animal.imageUrl"
-        [alt]="'Poza cu ' + animal.name"
-        class="animal-image"
-      />
-      <div class="card-overlay">
-        <div class="card-text">
-          <h3>{{ animal.name }}</h3>
-          <p>{{ animal.status }}</p>
-        </div>
+<!-- Antetul Secțiunii -->
+<header class="page-header">
+  <h1>Faceți cunoștință cu Rezidenții Noștri</h1>
+  <p>
+    Fiecare suflet de aici are o poveste unică și așteaptă cu speranță un ajutor
+    de la oamenii iubitori. Descoperă-i și lasă-te cucerit.
+  </p>
+</header>
+
+<!-- Grila de Poze -->
+<div class="gallery-grid">
+  <!-- Iterăm prin lista de animale afișate -->
+  <div
+    *ngFor="let animal of displayedAnimals; let i = index"
+    class="gallery-card"
+    [style.animation-delay.ms]="100 * (i + 1)"
+  >
+    <img
+      [src]="animal.imageUrl"
+      [alt]="'Poza cu ' + animal.name"
+      class="animal-image"
+    />
+    <div class="card-overlay">
+      <div class="card-text">
+        <h3>{{ animal.name }}</h3>
+        <p>{{ animal.status }}</p>
       </div>
     </div>
   </div>
-
-  <!-- Paginare -->
-  <nav class="pagination-container" *ngIf="totalPages > 1">
-    <!-- Butonul 'Previous' -->
-    <button
-      (click)="goToPage(currentPage - 1)"
-      [disabled]="currentPage === 1"
-      class="pagination-arrow"
-    >
-      &laquo;
-    </button>
-    <!-- Butoanele pentru numărul paginilor -->
-    <button
-      *ngFor="let page of pages"
-      (click)="goToPage(page)"
-      [class.active]="currentPage === page"
-      class="pagination-button"
-    >
-      {{ page }}
-    </button>
-    <!-- Butonul 'Next' -->
-    <button
-      (click)="goToPage(currentPage + 1)"
-      [disabled]="currentPage === totalPages"
-      class="pagination-arrow"
-    >
-      &raquo;
-    </button>
-  </nav>
 </div>
+
+<!-- Paginare -->
+<nav class="pagination-container" *ngIf="totalPages > 1">
+  <!-- Butonul 'Previous' -->
+  <button
+    (click)="goToPage(currentPage - 1)"
+    [disabled]="currentPage === 1"
+    class="pagination-arrow"
+  >
+    &laquo;
+  </button>
+  <!-- Butoanele pentru numărul paginilor -->
+  <button
+    *ngFor="let page of pages"
+    (click)="goToPage(page)"
+    [class.active]="currentPage === page"
+    class="pagination-button"
+  >
+    {{ page }}
+  </button>
+  <!-- Butonul 'Next' -->
+  <button
+    (click)="goToPage(currentPage + 1)"
+    [disabled]="currentPage === totalPages"
+    class="pagination-arrow"
+  >
+    &raquo;
+  </button>
+</nav>

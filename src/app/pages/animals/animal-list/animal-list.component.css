@@ -1,6 +1,69 @@
 /* Importul fonturilor (poate fi adăugat și în index.html sau styles.css global) */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:wght@700&display=swap");
 
+/* --- STILURI NOI PENTRU HERO SECTION --- */
+
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 80vh; /* O înălțime potrivită pentru a nu domina pagina */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  /* Asigură-te că ai o imagine relevantă în assets */
+  background-image: url("/assets/images/animals-hero.jpg");
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed; /* Efect de paralaxă */
+  margin-top: -64px;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hero-text {
+  position: relative;
+  z-index: 10;
+  animation: fadeInDown 1s ease-out;
+}
+
+.hero-text h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-text p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* Animație de apariție */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- SFÂRȘIT STILURI NOI --- */
+
 /* Containerul principal al paginii */
 .page-container {
   max-width: 1200px;
@@ -38,6 +101,8 @@
   display: grid;
   grid-template-columns: repeat(1, 1fr); /* O coloană pe mobil */
   gap: 2rem;
+  max-width: 1160px;
+  margin: 0 auto;
 }
 
 /* Cardul individual al unui animal */

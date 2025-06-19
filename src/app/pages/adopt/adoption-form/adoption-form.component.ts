@@ -1,41 +1,46 @@
 import { Component } from '@angular/core';
-import { NgFor, NgIf, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+// Definim o interfață simplă pentru imaginile din galerie
+interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
 @Component({
-  selector: 'app-adoption-form',
+  selector: 'app-adoption',
   standalone: true,
-  imports: [NgFor, NgOptimizedImage, RouterModule, NgIf],
+  imports: [CommonModule, RouterModule],
   templateUrl: './adoption-form.component.html',
-  styleUrl: './adoption-form.component.css',
+  styleUrls: ['./adoption-form.component.css'],
 })
 export class AdoptionFormComponent {
-  selectedAnimal: any = null;
-
-  animals = [
+  // Lista de imagini pentru galeria de la finalul paginii
+  galleryImages: GalleryImage[] = [
     {
-      name: 'Luna',
-      description: 'Gentle and curious goat who loves cuddles.',
-      image: 'https://bigpicturefarm.com/cdn/shop/products/ec78f653cc58acb67d851eacbc5942ee.jpg?v=1515716497',
+      src: '/assets/images/adoption/adopta-2.jpg',
+      alt: 'Vacuta cu ochi blânzi, simbol al iubirii și al grijii',
     },
     {
-      name: 'Bella',
-      description: 'A sweet sheep who enjoys sunbathing and grass naps.',
-      image: 'https://rootstothemoon.co.uk/wp-content/uploads/2023/04/sheep-Bella-sheep-2.jpeg',
+      src: '/assets/images/adoption/adopta-3.jpg',
+      alt: 'Vacuta cu ochii mari și blânzi, simbol al iubirii și al grijii',
     },
     {
-      name: 'Milo',
-      description: 'Friendly pig with a playful personality.',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQPIju3tClicrfvJigFiRDB6ao2UY1JtlAUA&s',
+      src: '/assets/images/adoption/adopta-4.jpg',
+      alt: 'vacuta cu nicusor',
     },
     {
-      name: 'Rina',
-      description: 'Quiet but affectionate cow who loves apples.',
-      image: 'https://www.singulart.com/images/artworks/v2/cropped/65078/main/zoom/2329603_b00a3d53d11316274c18cee28bbb7ec0.jpeg',
+      src: '/assets/images/adoption/adopta-5.jpg',
+      alt: 'Moment de tandrețe între un om și animal',
+    },
+    {
+      src: '/assets/images/adoption/adopta-6.jpg',
+      alt: 'Efrem, gardianul nostru, îngrijind animalele',
+    },
+    {
+      src: '/assets/images/adoption/adopta-7.jpg',
+      alt: 'Neytiri si Stela',
     },
   ];
-
-  selectAnimal(animal: any) {
-    this.selectedAnimal = animal;
-  }
 }

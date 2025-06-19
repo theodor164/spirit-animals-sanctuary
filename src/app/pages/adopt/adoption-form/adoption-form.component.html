@@ -1,49 +1,80 @@
-<section class="page-container">
-  <section class="adopt-hero">
-    <h1>Adopt a Friend</h1>
-    <p>
-      Give a rescued animal the loving home they deserve. By adopting, you’re giving them a second chance at life and becoming part of their healing journey.
-    </p>
-  </section>
-
-  <section class="adopt-quote">
-    <blockquote>
-      “Saving one animal won’t change the world, but it will change the world for that one animal.”
-    </blockquote>
-  </section>
-
-  <section class="adopt-info">
-    <h2>Why Adopt?</h2>
-    <p>
-      Every animal at our sanctuary has a story. Rescued from neglect or slaughter, these beautiful souls are now safe, but many are still waiting for their forever home.
-    </p>
-    <ul>
-      <li>Adoption changes lives — theirs and yours</li>
-      <li>We ensure ethical and responsible placements</li>
-      <li>You’ll always be part of our extended family</li>
-    </ul>
-  </section>
-
-  <section class="adopt-gallery">
-    <div class="animal-card" *ngFor="let animal of animals" (click)="selectAnimal(animal)">
-      <img [ngSrc]="animal.image" [alt]="animal.name" width="400" height="300" />
-      <h3>{{ animal.name }}</h3>
-      <p>{{ animal.description }}</p>
-      <button class="learn-more-btn">Learn More</button>
+<div class="adoption-page">
+  <!-- Secțiunea Erou -->
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-text">
+      <h1>Adoptă la Distanță un Suflet</h1>
+      <p>
+        Devino sprijinul lor permanent și parte din povestea lor de vindecare.
+      </p>
     </div>
   </section>
 
-  <section class="adopt-cta">
-    <h2>Ready to Adopt?</h2>
-    <a routerLink="/contact" class="adopt-button">Contact Us</a>
+  <!-- Secțiunea Informativă (Text + Imagine) -->
+  <section class="info-section">
+    <div class="info-container">
+      <div class="info-text">
+        <h2>Ce Înseamnă Adopția la Distanță?</h2>
+        <p>
+          Multe dintre animalele noastre, din cauza traumelor suferite sau a
+          nevoilor medicale speciale, vor rămâne permanent în grija
+          sanctuarului. Adopția la distanță este modul tău de a deveni
+          "părintele virtual" al unuia dintre acești rezidenți speciali.
+        </p>
+        <p>
+          Prin sponsorizarea lunară, contribui direct la asigurarea hranei, a
+          îngrijirilor medicale, a adăpostului și a tot ceea ce este necesar
+          pentru ca animalul ales de tine să ducă o viață fericită și lipsită de
+          griji. Vei primi actualizări periodice cu poze și vești despre
+          prietenul tău și, cel mai important, ești binevenit să îl vizitezi
+          oricând la sanctuar pentru a petrece timp cu el.
+        </p>
+        <a routerLink="/animals" class="info-button"
+          >Alege un Prieten pe Care să-l Susții</a
+        >
+      </div>
+      <div class="info-image">
+        <img
+          src="/assets/images/adoption/adopta-1.jpg"
+          alt="Persoană mângâind un câine fericit"
+        />
+      </div>
+    </div>
   </section>
 
-  <div class="modal" *ngIf="selectedAnimal" (click)="selectedAnimal = null">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <span class="close" (click)="selectedAnimal = null">&times;</span>
-      <img [src]="selectedAnimal.image" [alt]="selectedAnimal.name" />
-      <h2>{{ selectedAnimal.name }}</h2>
-      <p>{{ selectedAnimal.description }}</p>
+  <!-- Secțiunea Galerie Foto -->
+  <section class="gallery-section">
+    <div class="gallery-header">
+      <h2>Ei Așteaptă un Înger Păzitor</h2>
+      <p>Momente de bucurie cu rezidenții noștri permanenți.</p>
     </div>
-  </div>
-</section>
+    <div class="gallery-grid">
+      <!-- Iterăm prin lista de imagini din componentă -->
+      <div *ngFor="let image of galleryImages" class="gallery-item">
+        <img [src]="image.src" [alt]="image.alt" />
+      </div>
+    </div>
+  </section>
+
+  <!-- NOU: Secțiunea Call-to-Action -->
+  <section class="cta-section">
+    <div class="gallery-header">
+      <h2>Sistemul de Adopții este în Lucru</h2>
+      <p
+        style="
+          max-width: 700px;
+          margin: 1rem auto 1.5rem;
+          color: #4b5563;
+          font-size: 1.1rem;
+          line-height: 1.7;
+        "
+      >
+        Lucrăm cu drag la dezvoltarea unui sistem dedicat prin care să puteți
+        sponsoriza un anumit animal. Până la finalizarea acestuia, sprijinul
+        dumneavoastră este vital. Orice donație, unică sau lunară, ne ajută să
+        le oferim tuturor rezidenților noștri îngrijirea de care au nevoie.
+      </p>
+      <a routerLink="/donate" class="info-button">Mergi la Pagina de Donații</a>
+    </div>
+  </section>
+</div>

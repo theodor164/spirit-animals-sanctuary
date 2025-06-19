@@ -1,183 +1,191 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+/* Importul fonturilor (poate fi adăugat și în styles.css global) */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap");
 
-.page-container {
-  font-family: 'Inter', sans-serif;
-  background: #fffdf9;
-  color: #333;
+/* Stiluri generale */
+.adoption-page {
+  background-color: #f9fafb;
 }
 
-.adopt-hero {
-  background: linear-gradient(to right, #fff3e0, #ffe0b2);
-  padding: 5rem 2rem;
-  text-align: center;
-  animation: fadeIn 1s ease;
-}
-
-.adopt-hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.adopt-hero p {
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto;
-  color: #444;
-}
-
-.adopt-quote {
-  text-align: center;
-  font-style: italic;
-  margin: 2rem auto;
-  max-width: 800px;
-  padding: 1rem 2rem;
-  color: #555;
-}
-
-.adopt-info {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 0 2rem;
-  text-align: center;
-}
-
-.adopt-info h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.adopt-info ul {
-  list-style: disc;
-  text-align: left;
-  margin: 1rem auto;
-  padding: 0 2rem;
-  color: #444;
-}
-
-.adopt-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-  padding: 3rem 2rem;
-  background: #fefefe;
-}
-
-.animal-card {
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  text-align: center;
-  transition: transform 0.25s ease;
-  cursor: pointer;
-  padding: 1rem;
-}
-
-.animal-card:hover {
-  transform: translateY(-6px);
-}
-
-.animal-card img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-}
-
-.animal-card h3 {
-  font-size: 1.4rem;
-  margin: 0.5rem 0;
-}
-
-.animal-card p {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 1rem;
-}
-
-.learn-more-btn {
-  background: transparent;
-  border: 1px solid #ff914d;
-  color: #ff914d;
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.learn-more-btn:hover {
-  background: #ff914d;
-  color: white;
-}
-
-.adopt-cta {
-  text-align: center;
-  padding: 4rem 2rem;
-  background: #fff4e6;
-}
-
-.adopt-button {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 1rem 2rem;
-  background-color: #ff914d;
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  border-radius: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.adopt-button:hover {
-  background-color: #ff7b26;
-}
-
-/* Modal styles */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
+/* Secțiunea Erou */
+.hero-section {
+  position: relative;
+  height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 90%;
   text-align: center;
-  position: relative;
+  color: white;
+  background-image: url("/assets/images/adoption/adopta-hero.jpg");
+  background-size: cover;
+  background-position: bottom;
+  background-attachment: fixed; /* Efect de paralaxă */
+  margin-top: -64px; /* Ajustează înălțimea header-ului */
 }
 
-.modal-content img {
-  max-width: 100%;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-.modal-content h2 {
-  margin-bottom: 0.5rem;
-}
-
-.modal-content p {
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-.close {
+.hero-overlay {
   position: absolute;
-  top: 12px;
-  right: 20px;
-  font-size: 2rem;
-  cursor: pointer;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+}
+
+.hero-text {
+  position: relative;
+  z-index: 10;
+  animation: fadeIn 1s ease-out;
+}
+
+.hero-text h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.hero-text p {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+/* Secțiunea Informativă */
+.info-section {
+  padding: 4rem 1.5rem;
+  background-color: #ffffff;
+}
+
+.info-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap; /* Pentru responsivitate */
+  align-items: center;
+  gap: 3rem;
+}
+
+.info-text {
+  flex: 1 1 50%; /* Ocupă jumătate din spațiu, dar poate crește/scădea */
+  min-width: 300px;
+}
+
+.info-text h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 1.5rem;
+}
+
+.info-text p {
+  font-family: "Lato", sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
+}
+
+.info-button {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #43a047; /* Un verde închis, primitor */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.info-button:hover {
+  background-color: #388e3c;
+  transform: translateY(-2px);
+}
+
+.info-image {
+  flex: 1 1 40%;
+  min-width: 300px;
+}
+
+.info-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Secțiunea Galerie */
+.gallery-section {
+  padding: 4rem 1.5rem;
+  background-color: #f9fafb;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.gallery-header h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.gallery-header p {
+  font-size: 1.1rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1; /* Păstrează imaginile pătrate */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Media Queries */
+@media (min-width: 640px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .hero-text h1 {
+    font-size: 3.5rem;
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

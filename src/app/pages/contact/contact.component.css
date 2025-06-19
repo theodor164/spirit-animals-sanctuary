@@ -1,86 +1,164 @@
-.contact-hero {
-  text-align: center;
-  padding: 4rem 1rem;
-  background-color: #fff9f0;
+/* Importul fonturilor (opțional, dacă este deja global) */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400&display=swap");
+
+.contact-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  padding: 2rem 1rem;
+  background-color: #f3f4f6; /* Un gri foarte deschis */
+  font-family: "Roboto", sans-serif;
 }
 
-.contact-hero h1 {
-  font-size: 2.5rem;
+.contact-card {
+  display: grid;
+  grid-template-columns: 1fr; /* O singură coloană pe mobil */
+  max-width: 1100px;
+  width: 100%;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Panoul de informații din stânga */
+.info-panel {
+  background-color: #1f2937; /* Un gri-închis, elegant */
+  color: #e5e7eb;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 2.25rem;
+  font-weight: 600;
+  color: white;
   margin-bottom: 1rem;
 }
 
-.contact-hero p {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 1.1rem;
-  color: #555;
-}
-
-.contact-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 3rem;
-  padding: 2rem;
-  background: #fefefe;
+.info-subtitle {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 2.5rem;
 }
 
 .contact-details {
-  max-width: 400px;
-}
-
-.contact-details h2 {
-  margin-bottom: 1rem;
-}
-
-.contact-form {
-  max-width: 500px;
-  width: 100%;
-}
-
-.contact-form form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 
-.contact-form label {
+.detail-item {
   display: flex;
-  flex-direction: column;
-  font-weight: bold;
+  align-items: center;
+  gap: 1rem;
 }
 
-.contact-form input,
-.contact-form textarea {
-  padding: 0.7rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.detail-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #60a5fa; /* Un albastru pentru accent */
+  flex-shrink: 0;
 }
 
-.contact-form button {
-  align-self: flex-start;
-  background-color: #ff914d;
+.detail-text {
+  font-size: 0.95rem;
+  color: #d1d5db;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.detail-text:hover {
   color: white;
+}
+
+/* Panoul cu formularul din dreapta */
+.form-panel {
+  padding: 2.5rem;
+}
+
+.form-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.submit-button {
   padding: 0.8rem 1.5rem;
+  background-color: #16a34a;
+  color: white;
+  font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s;
+  align-self: flex-start;
 }
 
-.contact-form button:hover {
-  background-color: #ff7b26;
+.submit-button:hover:not([disabled]) {
+  background-color: #15803d;
 }
 
-.contact-map {
-  margin-top: 2rem;
-  padding: 2rem;
+.submit-button:disabled {
+  background-color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.captcha-container {
+  margin: 0.5rem auto;
+}
+
+.message-box {
+  padding: 1rem;
+  border-radius: 6px;
   text-align: center;
-  background: #fff4e6;
+  font-weight: 500;
+}
+.message-box.error {
+  background-color: #fef2f2;
+  color: #991b1b;
+}
+.message-box.success {
+  background-color: #ecfdf5;
+  color: #065f46;
 }
 
-.contact-map h2 {
-  margin-bottom: 1rem;
+/* Media Query pentru layout-ul pe două coloane */
+@media (min-width: 768px) {
+  .contact-card {
+    grid-template-columns: 1fr 1.25fr; /* Stânga puțin mai mică decât dreapta */
+  }
 }

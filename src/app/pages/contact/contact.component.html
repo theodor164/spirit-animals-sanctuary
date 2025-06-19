@@ -1,49 +1,126 @@
-<section class="page-container">
-  <section class="contact-hero">
-    <h1>Contact Us</h1>
-    <p>
-      We’d love to hear from you! Whether you’re interested in visiting,
-      adopting, volunteering, or simply have questions — reach out and let’s
-      connect.
-    </p>
-  </section>
-  <section class="contact-wrapper">
-    <div class="contact-details">
-      <h2>Get in Touch</h2>
-      <p><strong>Email:</strong> hello&#64;spiritanimals.ro</p>
-      <p><strong>Phone:</strong> +40 712 345 678</p>
-      <p><strong>Location:</strong> Bucovina, Romania</p>
+<div class="contact-page-container">
+  <div class="contact-card">
+    <!-- Coloana din stânga: Informații și Text -->
+    <div class="info-panel">
+      <div class="info-content">
+        <h1 class="info-title">Contactați-ne</h1>
+        <p class="info-subtitle">
+          Ne-am bucura să auzim de la dumneavoastră! Fie că aveți întrebări,
+          doriți să vizitați sanctuarul sau să discutați despre voluntariat,
+          suntem aici pentru a vă ajuta.
+        </p>
+        <div class="contact-details">
+          <div class="detail-item">
+            <!-- Iconiță Email -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="detail-icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+            <a href="mailto:hello@spiritanimals.ro" class="detail-text"
+              >hello&#64;spiritanimals.ro</a
+            >
+          </div>
+          <div class="detail-item">
+            <!-- Iconiță Telefon -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="detail-icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              />
+            </svg>
+            <span class="detail-text">+40 712 345 678</span>
+          </div>
+          <div class="detail-item">
+            <!-- Iconiță Locație -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="detail-icon"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+            <span class="detail-text">Bucovina, România</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="contact-form">
-      <!-- REMOVED (submit) from form tag -->
-      <form #contactForm="ngForm">
-        <label>
-          Name:
-          <input type="text" [(ngModel)]="form.name" name="name" required />
-        </label>
 
-        <label>
-          Email:
-          <input type="email" [(ngModel)]="form.email" name="email" required />
-        </label>
+    <!-- Coloana din dreapta: Formularul de Contact -->
+    <div class="form-panel">
+      <form #contactForm="ngForm" novalidate>
+        <div class="form-group">
+          <label for="name">Numele dumneavoastră</label>
+          <input
+            id="name"
+            type="text"
+            [(ngModel)]="form.name"
+            name="name"
+            placeholder="Nume complet"
+            required
+          />
+        </div>
 
-        <label>
-          Message:
+        <div class="form-group">
+          <label for="email">Adresa de e-mail</label>
+          <input
+            id="email"
+            type="email"
+            [(ngModel)]="form.email"
+            name="email"
+            placeholder="exemplu@email.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Mesajul</label>
           <textarea
+            id="message"
             [(ngModel)]="form.message"
             name="message"
+            rows="5"
+            placeholder="Scrieți mesajul dumneavoastră aici..."
             required
           ></textarea>
-        </label>
+        </div>
 
-        <!-- NEW: reCAPTCHA Component -->
-        <div class="form-group captcha-container">
+        <div class="captcha-container">
           <ngx-invisible-recaptcha
             #captchaElem
             [siteKey]="recaptchaSiteKey"
             (success)="handleRecaptchaSuccess($event)"
-          >
-          </ngx-invisible-recaptcha>
+          ></ngx-invisible-recaptcha>
         </div>
 
         <div
@@ -55,27 +132,16 @@
           {{ message }}
         </div>
 
-        <!-- UPDATED: Changed to a (click) event -->
         <button
           type="button"
           (click)="handleSendMessageClick(contactForm)"
-          [disabled]="isLoading"
+          [disabled]="isLoading || contactForm.invalid"
+          class="submit-button"
         >
-          <span *ngIf="!isLoading">Send Message</span>
-          <span *ngIf="isLoading">Sending...</span>
+          <span *ngIf="!isLoading">Trimite Mesajul</span>
+          <span *ngIf="isLoading">Se trimite...</span>
         </button>
       </form>
     </div>
-  </section>
-  <section class="contact-map">
-    <h2>Where to Find Us</h2>
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2699.8602342302383!2d25.9482874!3d47.6465589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4734727e56f225e7%3A0x7ba88f9f5eb9a55!2sBucovina!5e0!3m2!1sen!2sro!4v1684000000000"
-      width="100%"
-      height="300"
-      style="border: 0"
-      allowfullscreen=""
-      loading="lazy"
-    ></iframe>
-  </section>
-</section>
+  </div>
+</div>

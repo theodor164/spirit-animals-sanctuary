@@ -2,6 +2,19 @@
 /* 1. Importă toate fonturile într-un singur loc */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap");
 
+/* 2. Definirea paletei de culori ca variabile CSS */
+/* Acest lucru ne permite să refolosim culorile ușor și să le schimbăm dintr-un singur loc */
+:root {
+  --background-main: #f8f9fa; /* Un gri foarte deschis, curat */
+  --background-accent: #ffffff; /* Alb pentru carduri și secțiuni */
+  --text-primary: #2c3e50; /* Albastru-gri închis pentru textul principal */
+  --text-secondary: #7f8c8d; /* Gri mai deschis pentru paragrafe */
+  --accent-green: #16a34a; /* Verdele vibrant pentru butoane de succes */
+  --accent-red: #e74c3c; /* Roșu-coral pentru accente și butoane de acțiune */
+  --accent-blue: #3b82f6; /* Albastru pentru linkuri */
+  --border-color: #e5e7eb; /* O culoare subtilă pentru borduri și linii */
+}
+
 html,
 body {
   height: 100%;
@@ -9,14 +22,26 @@ body {
 body {
   margin: 0;
   font-family: "Lato", sans-serif; /* Fontul implicit pentru tot textul */
-  background-color: #f8f9fa; /* Culoarea de fundal implicită */
-  color: #2c3e50; /* Culoarea textului implicită */
+  background-color: var(--background-main);
+  color: var(--text-primary);
 }
 
 h1,
 h2,
 h3 {
   font-family: "Playfair Display", serif; /* Fontul implicit pentru toate titlurile */
+}
+
+/* Stiluri implicite pentru linkuri */
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #2563eb; /* O nuanță mai închisă de albastru la hover */
 }
 
 .page-container {

@@ -4,6 +4,7 @@ import {
   Inject,
   PLATFORM_ID,
   ElementRef,
+  ViewChild,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
@@ -22,6 +23,9 @@ interface Animal {
   styleUrls: ['./animal-list.component.css'],
 })
 export class AnimalListComponent implements OnInit {
+  // NOU: Obținem o referință la containerul grilei din HTML
+  @ViewChild('animalGrid') animalGrid!: ElementRef;
+
   // Lista completă cu toate animalele
   private allAnimals: Animal[] = [
     {
@@ -166,11 +170,13 @@ export class AnimalListComponent implements OnInit {
       // --- AICI ESTE MODIFICAREA ---
       // Verificăm dacă suntem în browser și apoi facem scroll
       if (this.isBrowser) {
-        // Folosim elementRef pentru a derula la începutul componentei
-        this.elementRef.nativeElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
+        // --- MODIFICARE: Verificăm dacă elementul animalGrid există înainte de a face scroll ---
+        if (this.animalGrid) {
+          this.animalGrid.nativeElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
       }
     }
   }

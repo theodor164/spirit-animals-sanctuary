@@ -7,7 +7,7 @@
 }
 
 .newsletter-container {
-  /* max-width: 1100px; */
+  max-width: 1160px;
   margin: 0 auto;
   /* display: grid; */
   grid-template-columns: 1fr;

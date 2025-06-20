@@ -53,6 +53,10 @@
   flex-wrap: wrap;
 }
 
+div.links-column.menu > h3 {
+  text-align: center;
+}
+
 li {
   list-style: none;
 }

@@ -23,6 +23,8 @@
     *ngFor="let animal of displayedAnimals; let i = index"
     class="gallery-card"
     [style.animation-delay.ms]="100 * (i + 1)"
+    (click)="toggleOverlay(animal)"
+    [class.overlay-active]="animal.isOverlayVisible"
   >
     <img
       [src]="animal.imageUrl"

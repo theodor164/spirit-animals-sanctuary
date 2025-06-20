@@ -115,10 +115,13 @@
   animation: fadeIn 0.6s ease-out forwards;
 }
 
-.gallery-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+/* Efect de hover simplu, doar pentru desktop, nu afișează overlay-ul */
+@media (hover: hover) {
+  .gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .animal-image {
@@ -137,10 +140,7 @@
   display: flex;
   align-items: flex-end;
   padding: 1.5rem;
-}
-
-.gallery-card:hover .card-overlay {
-  opacity: 1;
+  pointer-events: none;
 }
 
 /* Textul care apare la hover */
@@ -151,9 +151,34 @@
   opacity: 0;
 }
 
-.gallery-card:hover .card-text {
+/* --- AICI ESTE CORECȚIA FINALĂ --- */
+
+/* 1. Logica pentru TAP (mobil): Se activează DOAR când adăugăm clasa .overlay-active */
+.gallery-card.overlay-active .card-overlay {
+  opacity: 1;
+}
+
+.gallery-card.overlay-active .card-text {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* 2. Logica pentru HOVER (desktop): Se activează DOAR pe dispozitivele care suportă hover */
+@media (hover: hover) {
+  .gallery-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  .gallery-card:hover .card-overlay {
+    opacity: 1;
+  }
+
+  .gallery-card:hover .card-text {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .card-text h3 {

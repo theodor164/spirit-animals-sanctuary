@@ -13,6 +13,7 @@ interface Animal {
   name: string;
   status: string;
   imageUrl: string;
+  isOverlayVisible?: boolean;
 }
 
 @Component({
@@ -160,6 +161,17 @@ export class AnimalListComponent implements OnInit {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.displayedAnimals = this.allAnimals.slice(startIndex, endIndex);
+  }
+
+  // NOU: Funcție pentru a afișa/ascunde detaliile pe mobil
+  toggleOverlay(selectedAnimal: Animal): void {
+    const currentState = selectedAnimal.isOverlayVisible;
+    // Mai întâi, ascundem toate celelalte overlay-uri pentru a avea doar unul activ
+    this.displayedAnimals.forEach((animal) => {
+      animal.isOverlayVisible = false;
+    });
+    // Apoi, comutăm starea celui selectat
+    selectedAnimal.isOverlayVisible = !currentState;
   }
 
   goToPage(page: number): void {

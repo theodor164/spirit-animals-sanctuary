@@ -1,9 +1,7 @@
 /* Importul fonturilor */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@500;600;700&display=swap");
 
 /* Stiluri generale */
 .volunteer-page {
-  font-family: "Roboto", sans-serif;
   background-color: #f9fafb;
 }
 
@@ -31,7 +29,6 @@
   z-index: 10;
 }
 .hero-text h1 {
-  font-family: "Poppins", sans-serif;
   font-size: 2.5rem;
   font-weight: 700;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
@@ -59,7 +56,6 @@
 .info-container h2,
 .activities-header h2,
 .process-header h2 {
-  font-family: "Poppins", sans-serif;
   font-size: 2.25rem;
   font-weight: 600;
   color: #1f2937;
@@ -106,7 +102,6 @@
   margin-bottom: 1rem;
 }
 .activity-card h3 {
-  font-family: "Poppins", sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
@@ -133,13 +128,11 @@
   border: 1px solid #e5e7eb;
 }
 .step-number {
-  font-family: "Poppins", sans-serif;
   font-size: 2rem;
   font-weight: 700;
   color: #d1d5db;
 }
 .step-content h4 {
-  font-family: "Poppins", sans-serif;
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
@@ -167,7 +160,6 @@
 }
 
 .cta-container h2 {
-  font-family: "Poppins", sans-serif;
   font-size: 2rem;
   font-weight: 600;
   color: #1f2937;

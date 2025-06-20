@@ -14,7 +14,6 @@ h2 {
   margin-bottom: 25px;
   color: #333;
   font-weight: 600;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 label {
@@ -34,7 +33,6 @@ input[type="password"] {
   border: 1.8px solid #ccc;
   border-radius: 6px;
   font-size: 16px;
-  font-family: inherit;
   transition: border-color 0.3s ease;
 }
 

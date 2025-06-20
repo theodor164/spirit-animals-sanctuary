@@ -1,5 +1,4 @@
 /* Importul fonturilor (poate fi adăugat și în styles.css global) */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@300;400;700&display=swap");
 
 /* Stiluri generale */
 .adoption-page {
@@ -35,14 +34,12 @@
 }
 
 .hero-text h1 {
-  font-family: "Playfair Display", serif;
   font-size: 2.5rem;
   font-weight: 700;
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
 }
 
 .hero-text p {
-  font-family: "Lato", sans-serif;
   font-size: 1.1rem;
   font-weight: 300;
   margin-top: 0.5rem;
@@ -70,7 +67,6 @@
 }
 
 .info-text h2 {
-  font-family: "Playfair Display", serif;
   font-size: 2.25rem;
   font-weight: 700;
   color: #1f2937;
@@ -78,7 +74,6 @@
 }
 
 .info-text p {
-  font-family: "Lato", sans-serif;
   font-size: 1.1rem;
   line-height: 1.7;
   color: #4b5563;
@@ -127,7 +122,6 @@
 }
 
 .gallery-header h2 {
-  font-family: "Playfair Display", serif;
   font-size: 2.25rem;
   font-weight: 700;
   color: #1f2937;

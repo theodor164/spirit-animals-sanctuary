@@ -1,5 +1,4 @@
 /* Importul fonturilor necesare */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@300;400&display=swap");
 
 /* Stiluri generale pentru pagina */
 .story-page {
@@ -44,7 +43,6 @@
 }
 
 .hero-text h1 {
-  font-family: "Playfair Display", serif;
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -52,7 +50,6 @@
 }
 
 .hero-text p {
-  font-family: "Roboto", sans-serif;
   font-size: 1.25rem;
   font-weight: 300;
   margin-top: 0.5rem;
@@ -100,7 +97,6 @@
 }
 
 .team-header h2 {
-  font-family: "Playfair Display", serif;
   font-size: 2.5rem;
   font-weight: 700;
   color: #1a202c;
@@ -178,7 +174,6 @@ section.team-section > div.team-grid > div:nth-child(4) > div.card-content {
 }
 
 h3 {
-  font-family: "Playfair Display", serif;
   font-size: 1.75rem;
   font-weight: 700;
   color: white;

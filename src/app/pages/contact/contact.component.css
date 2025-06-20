@@ -1,5 +1,4 @@
 /* Importul fonturilor (opțional, dacă este deja global) */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400&display=swap");
 
 .contact-page-container {
   display: flex;
@@ -8,7 +7,6 @@
   min-height: 90vh;
   padding: 2rem 1rem;
   background-color: #f3f4f6; /* Un gri foarte deschis */
-  font-family: "Roboto", sans-serif;
 }
 
 .contact-card {
@@ -33,7 +31,6 @@
 }
 
 .info-title {
-  font-family: "Poppins", sans-serif;
   font-size: 2.25rem;
   font-weight: 600;
   color: white;
@@ -93,7 +90,6 @@
 }
 
 .form-group label {
-  font-family: "Poppins", sans-serif;
   font-weight: 500;
   margin-bottom: 0.5rem;
   color: #374151;

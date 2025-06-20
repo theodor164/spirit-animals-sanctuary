@@ -9,9 +9,9 @@
 }
 
 .newsletter-container {
-  max-width: 1100px;
+  /* max-width: 1100px; */
   margin: 0 auto;
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 1fr;
   align-items: center;
   gap: 3rem;
@@ -19,6 +19,7 @@
 
 .text-content {
   text-align: center;
+  margin-bottom: 15px;
 }
 
 .section-title {
@@ -46,9 +47,12 @@
   display: flex;
   gap: 0.5rem;
   background-color: white;
-  border-radius: 50px; /* Complet rotunjit */
+  border-radius: 5px;
   padding: 0.5rem;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  @media (max-width: 450px) {
+    flex-direction: column; /* Pe ecrane mici, formularul devine vertical */
+  }
 }
 
 .subscription-form input {
@@ -58,6 +62,9 @@
   padding: 0.75rem 1rem;
   font-size: 1rem;
   color: #1f2937;
+  @media (max-width: 450px) {
+    text-align: center; 
+  }
 }
 
 .subscription-form input:focus {
@@ -101,6 +108,7 @@
 /* Media Query pentru layout pe două coloane */
 @media (min-width: 992px) {
   .newsletter-container {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: left;
   }

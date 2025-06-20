@@ -9,7 +9,7 @@
 .footer-container {
   background-color: #00a8b5;
   max-width: 1160px;
-  width: 97%;
+  /* width: 97%; */
   margin: 0 auto;
   padding: 1rem;
   display: flex;
